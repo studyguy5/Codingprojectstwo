@@ -1,0 +1,130 @@
+/* Setzt den gesamten Body auf eine Flexbox, damit das Spiel in der Mitte erscheint */
+body {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+  height: 100vh; /* Setzt die Höhe auf die volle Fensterhöhe */
+  margin: 0;
+  background-color: #323232; /* Helles Grau als Hintergrund */
+}
+
+.headline{
+margin-top:30px;  
+}
+.headline h1{
+  text-align: center;
+  color: white;
+  font-size:40px;
+}
+
+#gameBoard {
+  margin-top:300px;
+  display: grid;
+  grid-template-columns: repeat(3, 160px); /* 3 Spalten mit jeweils 100px Breite */
+  grid-template-rows: repeat(3, 160px);    /* 3 Reihen mit jeweils 100px Höhe */
+  gap: 2px; /* Abstand zwischen den Zellen */
+   /* Weiße Umrandung um das Spielfeld */
+  
+  background-color: #323232; /* Dunkler Hintergrund für das Spielfeld */
+  border-radius: 10px; /* Abrundung der Ecken des Spielfelds */
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 160px;
+   
+  
+  font-size: 2em; /* Größerer Text für das X/O */
+  font-weight: bold;
+  color: #333; /* Dunkle Farbe für X/O */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Sanfte Hintergrundfarben-Übergänge */
+}
+
+.cell:nth-child(3n+1){
+  border-right:4px solid white;
+}
+.cell:nth-child(3n+2){
+  border-right:4px solid white;
+}
+.cell:nth-child(1n+4) {
+  border-top:4px solid white;
+}
+.cell:nth-child(1n+1){
+  border-bottom: 0px solid black;
+}
+
+.cell:hover {
+  background-color: #534040; /* Helle Hintergrundfarbe, wenn die Zelle gehobert wird */
+}
+
+.cell:active {
+  background-color: #8b7b7b; /* Dunklere Hintergrundfarbe beim Klicken */
+}
+
+
+.x-template {
+  color: rgb(126, 53, 53);
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.o-template {
+  color: rgb(30, 30, 99);
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.winning-cell {
+  position: relative;
+}
+
+.line-horizontal::after,
+.line-vertical::after,
+.line-diagonal-left::after,
+.line-diagonal-right::after {
+  content: '';
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+}
+
+.line-horizontal::after {
+  width: 300%;
+  height: 5px;
+  top: 50%;
+  left: -100%;
+  transform: translateY(-50%);
+}
+
+.line-vertical::after {
+  height: 300%;
+  width: 5px;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.line-diagonal-left::after {
+  width: 361%;
+  height: 5px;
+  top: 47%;
+  left: -130%;
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+.line-diagonal-right::after {
+  width: 358%;
+  height: 5px;
+  top: 50%;
+  left: -128%;
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+
