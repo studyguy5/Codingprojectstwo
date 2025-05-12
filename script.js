@@ -41,11 +41,13 @@ function renderFields() {
     // Gewinnerlinie markieren
     if (winningLine.includes(i)) {
       cell.classList.add('winning-cell');
-      if (winningLine[1] === i) {
+
+
+      // Linie auf das mittlere Feld anwenden (zentral für Ausrichtung)
+      if (winningLine.length === 3 && i === winningLine[1]) {
         cell.classList.add(`line-${winningDirection}`);
       }
-    }
-
+    };
 
     if (!fields[i] && !gameOver) {
       cell.addEventListener('click', () => handleClick(i));
@@ -73,6 +75,7 @@ function handleClick(index) {
   if (fields.every(field => field)) {
     alert("Unentschieden!");
     setTimeout(resetGame, 1500);
+
     return;
   }
 
@@ -118,9 +121,13 @@ function getLineDirection(combo) {
 
 
 function resetGame() {
+  renderFields();
+  winningLine = [];
+  winningDirection = '';
   fields = Array(9).fill(null);
   currentPlayer = 'X';
   gameOver = false;
-  renderFields();
+
+  
 }
 
