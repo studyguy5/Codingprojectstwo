@@ -39,7 +39,7 @@ let nextPlayer1 = playerofGame[currentIndex];     // current Index as the name s
 function showPlayer() {
   let play = document.getElementById('player')
   if ((fields.every(element => element === null))) {    // checks if every element is still null
-    play.innerHTML = `<p class="${currentPlayer}-template">set the fist letter: ${currentPlayer}</p>`
+    play.innerHTML = `<p class="${currentPlayer}-template">set the first letter: ${currentPlayer}</p>`
   } else if (currentPlayer === 'O') {    //if not every index is null, then show normal view
     play.innerHTML = `<p class="${currentPlayer}-template">move done: ${currentPlayer}</p><br><p class="${nextPlayer}-template"> next is: ${nextPlayer}</p>`
   } else if (currentPlayer === 'X') {
