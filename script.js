@@ -1,6 +1,6 @@
 function init() {
   renderFields();
-
+  showPlayer();
 }
 
 let fields = [
@@ -16,10 +16,23 @@ let fields = [
   null,
 ]
 
-let currentPlayer = 'X';
+let playerofGame = ['X', 'O'];
+let currentPlayer = 'O';
 let gameOver = false;
 let winningLine = [];
 let winningDirection = '';
+let currentIndex = playerofGame.indexOf(currentPlayer);
+let nextPlayer = playerofGame[1 - currentIndex];
+
+
+
+function showPlayer(nextPlayer){
+  let play = document.getElementById('player')
+  renderFields();
+     
+    
+    play.innerHTML = `current Player: <br>${currentPlayer} ${playerofGame[nextPlayer]}`
+}
 
 
 
@@ -58,13 +71,18 @@ function renderFields() {
 }
 
 
+//currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
 
 function handleClick(index) {
-  if (fields[index] || gameOver) return;
-
+  if (!(fields[1]) || gameOver){    //checks if the array is not filled with two indizes (index 0 and 1)
+    //if so (the first click), then don't toggle classList
+  }else{
+  player.classList.toggle('o-template');    //if it's filled with two indizes, then toggle classList
+  }
   fields[index] = currentPlayer;
-  renderFields();
+  showPlayer(currentPlayer);
 
+  console.log('aktualisiert');
   if (checkWin(currentPlayer)) {
     alert(`${currentPlayer} hat gewonnen!`);
     gameOver = true;
@@ -79,8 +97,11 @@ function handleClick(index) {
     return;
   }
 
-  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  
+  currentPlayer = currentPlayer === 'O' ? 'X' : 'O';
 }
+
+
 
 function checkWin(player) {
   const winningCombos = [
@@ -121,11 +142,11 @@ function getLineDirection(combo) {
 
 
 function resetGame() {
-  renderFields();
-  winningLine = [];
-  winningDirection = '';
+  renderFields();               // one of the finale move to change the order of renderFields();
+  winningLine = [];             // and set winningLine and winningDirection empty again  
+  winningDirection = '';         // was tricky to follow every step here and understand
   fields = Array(9).fill(null);
-  currentPlayer = 'X';
+  currentPlayer = 'O';
   gameOver = false;
 
   
