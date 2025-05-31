@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon-Viewer</title>
     <link rel="stylesheet" href="./basic.css">
+    <link rel="stylesheet" href="./pokemoncard.css">
+    <script src="./render.js"></script>
 </head>
-<body>
+<body onload="init()">
 <div class="header-fullsize">
     <header class="header-section-content">
     <div class="header-logo">
@@ -15,10 +17,14 @@
     </div>
         <div class="header-searchbar">
             <input type="text"placeholder="search here...">
-        </div>
+        </div><!--<button onclick="renderPokemon()">Try</button>-->
     </header>
 </div>
-<main class="main-section"></main>
+<main class="main-section-fullsize">
+<div class="main-section-content" id="main-section-content">  
+</div>
+<button onclick="renderNext()">Load Next Pokemon</button>
+</main>
 <footer class="footer-fullsize">
     <footer class="footer-content">
         <img src="./images/img/developer-akademie-logo.png" alt="developer-akademie-logo">

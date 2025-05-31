@@ -1,0 +1,165 @@
+.pokemoncontainer {
+    margin: 25px;
+    width: 260px;
+    height: 320px;
+    border: 2px solid blue;
+
+}
+
+.pokemonName {
+    display: flex;
+    justify-content: left;
+    color: white;
+    background-color: rgb(21, 21, 177);
+}
+
+.pokemonName h4 {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-right: 70px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.ImageContainer {
+    width: 260px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.fire-Img {
+    background-color: orange;
+}
+
+.grass-Img {
+    background-color: lightgreen;
+}
+
+.bug-Img {
+    background-color: rgb(74, 100, 3);
+}
+
+.normal-Img {
+    background-color: rgb(101, 166, 185);
+}
+
+.dragon-Img {
+    background-color: aqua;
+}
+
+.electric-Img {
+    background-color: aqua;
+}
+
+.fairy-Img {
+    background-color: aqua;
+}
+
+.flying-Img {
+    background-color: aqua;
+}
+
+.ground-Img {
+    background-color: rgb(187, 103, 103);
+}
+
+.ice-Img {
+    background-color: lightblue;
+}
+
+.water-Img {
+    background-color: lightblue;
+}
+
+
+.ImageContainer img {
+    width: 95%;
+}
+
+.type-button-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+    height: 80px;
+}
+
+.type-button-area img {
+    width: 38px;
+    height: 38px;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+.fire {
+    background-color: orangered;
+}
+
+.grass {
+    background-color: green;
+}
+
+.bug {
+    background-color: gold;
+}
+
+.dark {
+    background-color: purple;
+}
+
+.dragon {
+    background-color: burlywood;
+}
+
+.electric {
+    background-color: yellow;
+}
+
+.fairy {
+    background-color: violet;
+}
+
+.flying {
+    background-color: lightskyblue;
+}
+
+.ghost {
+    background-color: lightgrey;
+}
+
+.ground {
+    background-color: brown;
+}
+
+.ice {
+    background-color: lightblue;
+}
+
+.normal {
+    background-color: violet;
+}
+
+.poison {
+    background-color: red;
+
+}
+
+.psychic {
+    background-color: darkred;
+}
+
+.rock {
+    background-color: lightgray;
+}
+
+.steel {
+    background-color: grey;
+}
+
+.water {
+    background-color: lightblue;
+}

@@ -11,7 +11,7 @@ body{
     max-width:100%;
     display:flex;
     justify-content: center;
-    background-color: rgb(9, 9, 48);
+    background-color: rgb(12, 12, 129);
 }
 
 .header-section-content{
@@ -39,18 +39,39 @@ body{
     width:125px;
 }
 
+.main-section-fullsize{
+   padding: 30px 50px;
+   background-color: rgb(6, 6, 94);
+}
 
-.main-section{
-    flex:1;
+.main-section-fullsize button{
+    display: flex;
+    margin: 0 auto;
+    padding: 5px 30px;
+    border-radius: 10px;
+    background-color: green;
+}
+
+.main-section-content{
+    display:ruby;
+    margin: 0 auto;
     
 }
+
+.main-section button{
+    width:150px;
+    height:30px;
+
+}
+
+
 
 .footer-fullsize{
     width:100%;
     max-width:100%;
     display:flex;
     justify-content: center;
-    background-color: rgb(9, 9, 48);
+    background-color: rgb(12, 12, 129);
 }
 
 .footer-content{
