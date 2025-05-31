@@ -60,12 +60,7 @@ async function renderPokemon() {
 //VM im Debugger steht für Virtual Maschine
 
 async function renderNext() {
-    let basicUrl2 = 'https://pokeapi.co/api/v2/pokemon?offset=21&limit=20';
-
-    let result = await fetch(basicUrl2); //let result
-
-    let resultAsJSON = await result.json();       //
-    let pokemon2 = resultAsJSON.results;
+    
     let mainsectioncontent = document.getElementById('main-section-content');
 
     for (let nextPokemonIndex = 21; nextPokemonIndex <= 40; nextPokemonIndex++) {
@@ -78,7 +73,7 @@ async function renderNext() {
 
         mainsectioncontent.innerHTML += `<div class="pokemoncontainer">
         <div class="pokemonName">
-        <h4>#${nextPokemonIndex}</h4> <h3>${pokemon2[nextPokemonIndex - 21].name}</h3>
+        <h4>#${nextPokemonIndex}</h4> <h3>${detailsAsPokemon.name}</h3>
         </div>
         <div class="ImageContainer ${detailsAsPokemon.types[0].type.name}-Img">
         <img src="${detailsAsPokemon.sprites.other.dream_world['front_default']}">
