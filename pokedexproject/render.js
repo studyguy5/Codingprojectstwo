@@ -8,39 +8,39 @@ let detailsAsPokemon = [];
 let allPokemon = [];
 let resultAsJSON = [];
 let UrlPackages = [];
-
+let firstload = true;
 let firstUrlset = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
 
 
 
 async function getUrlForPokemon() {
-    if(firstUrlset){
-    let test = await fetch(firstUrlset);
-    let testresult = await test.json();
-    getAllPokemon(testresult);
-    } else{
-        let test2 = await fetch(nextUrlset);
-        let testAsJson = await test2.json();
-        getAllPokemon(testAsJson);
-    }
+    
+        let test = await fetch(firstUrlset);
+        let testresult = await test.json();
+        await getAllPokemon(testresult);              // testresult and testAsJson migrate into getAllPokemon, we need only one paramter in getAllPokemon
+    
 
-    console.log(testresult);
-
+    
+    console.log(allPokemon);
 };
 
 
 
-async function getAllPokemon(testresult, testAsJson) {
+async function getAllPokemon(testresult) {
 
-    for (let getPokemonIndex = 0; getPokemonIndex < testresult.results.length; getPokemonIndex++) {
 
-        let singelUrl = await fetch(testresult.results[getPokemonIndex].url);
-        let singlePokemonInJson = await singelUrl.json();
-        allPokemon.push(singlePokemonInJson);
+        for (let getPokemonIndex = 0; getPokemonIndex < testresult.results.length; getPokemonIndex++) {
 
-    }
-    console.log(allPokemon);
-    renderFirstPokemon(allPokemon);
+            let singelUrl = await fetch(testresult.results[getPokemonIndex].url);
+            let singlePokemonInJson = await singelUrl.json();
+            allPokemon.push(singlePokemonInJson);
+        };
+        if(firstload){
+            renderFirstPokemon();
+            firstload = false;
+        };
+    
+    
     await getNextPokemonpackage(testresult);
 
 };
@@ -50,15 +50,16 @@ async function getNextPokemonpackage(testresult) {
 
     let nextPackage = await fetch(nextUrl);
     let resultAsJson = await nextPackage.json();
-    console.log(resultAsJson);
+    await getAllPokemon(resultAsJson);
     let nextUrlset = resultAsJson.next;
     console.log(nextUrlset);
 
+    //here we get the package Link which contains all 20 Links
 
 }
 
-//here we see a short if-statement within a literals start with an ${} and put a literals again in the if statement within the literals
-//so it's possible to put a literals within a literals
+
+
 
 
 //<img src="${detailsAsJSON.sprites.other.showdown['front_default']}"> thats the gif's who moves in the image
@@ -69,7 +70,7 @@ async function getNextPokemonpackage(testresult) {
 //VM im Debugger steht für Virtual Maschine
 
 
-function renderFirstPokemon(allPokemon) {
+function renderFirstPokemon() {
 
     let mainsectioncontent = document.getElementById('main-section-content');
     for (let firstPokemonIndex = 0; firstPokemonIndex < allPokemon.length; firstPokemonIndex++) {
@@ -87,30 +88,31 @@ function renderFirstPokemon(allPokemon) {
         ${allPokemon[firstPokemonIndex].types[1] ? `<img class="${allPokemon[firstPokemonIndex].types[1].type.name}" src="./images/icons/${allPokemon[firstPokemonIndex].types[1].type.name}.svg">` : ''}   
         </div>
         </div>`
-    }
-}
+    }//here we see a short if-statement within a literals start with an ${} and put a literals again in the if statement within the literals
+}//so it's possible to put a literals within a literals
 
 
 
-function renderNext(detailsAsPokemon, nextPokemonIndex) {
-
+function renderNextPokemon() {
+    
+        
     let mainsectioncontent = document.getElementById('main-section-content');
 
-    for (let nextPokemonIndex2 = 0; nextPokemonIndex2 <= 20; nextPokemonIndex2++) {
+    for (let nextPokemonIndex2 = 0; nextPokemonIndex2 <20; nextPokemonIndex2++) {
 
         mainsectioncontent.innerHTML += `<div class="pokemoncontainer">
         <div class="pokemonName">
-        <h4>#${nextPokemonIndex2 + 21}</h4> <h3>${detailsAsPokemon[nextPokemonIndex2].name}</h3>
+        <h4>#${nextPokemonIndex2 + 21}</h4> <h3>${allPokemon[nextPokemonIndex2].name}</h3>
         </div>
-        <div class="ImageContainer ${detailsAsPokemon[nextPokemonIndex2].name}-Img">
-        <img src="${detailsAsPokemon[nextPokemonIndex2].sprites.other.dream_world['front_default']}">
+        <div class="ImageContainer ${allPokemon[nextPokemonIndex2].name}-Img">
+        <img src="${allPokemon[nextPokemonIndex2].sprites.other.dream_world['front_default']}">
         </div>
         <div class="type-button-area">
-        <img class="${detailsAsPokemon[nextPokemonIndex2].types[0].type.name}"src="./images/icons/${detailsAsPokemon[nextPokemonIndex2].types[0].type.name}.svg">
-        ${detailsAsPokemon[nextPokemonIndex2].types[1] ? `<img class="${detailsAsPokemon[nextPokemonIndex2].types[1].type.name}" src="./images/icons/${detailsAsPokemon[nextPokemonIndex2].types[1].type.name}.svg">` : ''}   
+        <img class="${allPokemon[nextPokemonIndex2].types[0].type.name}"src="./images/icons/${allPokemon[nextPokemonIndex2].types[0].type.name}.svg">
+        ${allPokemon[nextPokemonIndex2].types[1] ? `<img class="${allPokemon[nextPokemonIndex2].types[1].type.name}" src="./images/icons/${allPokemon[nextPokemonIndex2].types[1].type.name}.svg">` : ''}   
         </div>
         </div>`
-    } console.log(detailsAsPokemon);
+    } console.log(allPokemon);
 };
 
 
