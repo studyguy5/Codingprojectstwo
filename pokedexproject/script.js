@@ -8,7 +8,7 @@ let limit = 20;
 
 async function init() {
     await getUrlForPokemon();
-
+    
 };
 
 
@@ -28,16 +28,15 @@ async function getUrlForPokemon() {
 
 
 async function getNextUrlSet() {
+    if(offset > 1299){
+        limit =2 
+    }else{
         let fetchNextPackage = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);            //fetch the Url Package ich muss das hier dynamisch machen
         let nextUrlAsJson = await fetchNextPackage.json();              //transform into json
         //let nextUrlContainer = UrlAsJson.next;                  //next Url here offset 20 limit 40
         getAllPokemon(nextUrlAsJson);
-        offset += 20;     
+        offset += 20;}     
 }
-
-
-
-
 
 async function getAllPokemon(packageresultAsJson) {     //here we fetch each single Url of the package
     for (let getPokemonIndex = 0; getPokemonIndex < packageresultAsJson.results.length; getPokemonIndex++) {
@@ -54,8 +53,6 @@ async function getAllPokemon(packageresultAsJson) {     //here we fetch each sin
     }
 }
 
-
-
 //<img src="${detailsAsJSON.sprites.other.showdown['front_default']}"> thats the gif's who moves in the image
 
 //https://willowy-alfajores-643a8c.netlify.app/manifest.json
@@ -69,7 +66,7 @@ function renderFirstPokemon() {
     for (let firstPokemonIndex = 0; firstPokemonIndex < 20; firstPokemonIndex++) {
 
         mainsectioncontent.innerHTML += `
-        <div class="pokemoncontainer">
+        <div onclick="overlayWindowdiv(${firstPokemonIndex}); toggleOverlayWindow()" class="pokemoncontainer">
         <div class="pokemonName">
         <h4>#${firstPokemonIndex + 1}</h4> <h3>${allPokemon[firstPokemonIndex].name}</h3>
         </div>
