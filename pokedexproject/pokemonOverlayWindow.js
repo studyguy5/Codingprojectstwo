@@ -18,14 +18,14 @@ function overlayWindowdiv(firstPokemonIndex) {
     <div class="pokemondetails" id="pokemondetails">
     </div>
    `
-   showMain(firstPokemonIndex);
+    showMain(firstPokemonIndex);
     console.log('funktion arbeitet');
 };
 
 
-function showstats(firstPokemonIndex){
+function showstats(firstPokemonIndex) {
     let statscontainer = document.getElementById('pokemondetails')
-    statscontainer.innerHTML= `<div>
+    statscontainer.innerHTML = `<div>
     <table>
     <tr>
         <td><h3>${allPokemon[firstPokemonIndex].stats[0].stat.name}</h3></td>
@@ -55,9 +55,9 @@ function showstats(firstPokemonIndex){
     `
 }
 
-function showMain(firstPokemonIndex){
+function showMain(firstPokemonIndex) {
     let maincontainer = document.getElementById('pokemondetails')
-    maincontainer.innerHTML=`
+    maincontainer.innerHTML = `
     <table>
     <tr>
         <td><h3>Height</h3></td>
@@ -79,29 +79,73 @@ function showMain(firstPokemonIndex){
 }
 
 
+// try to fix the picture index problem
 
-
-function showEvochain(index){
+async function showEvochain(index) {
     let evocontainer = document.getElementById('pokemondetails')
-    if (allEvoChains[index].id !== allEvoChains[index].id){
-        evocontainer.innerHTML=`
+    let specialindex = Math.floor(index / 3);
+    let i = specialindex;
+    
+    let EvoImageUrl1 = allEvoChains[i].chain.species.url;
+    let EvoImageUrl2 = allEvoChains[i].chain.evolves_to[0] ? allEvoChains[i].chain.evolves_to[0].species.url : ''; 
+    let EvoImageUrl3 = allEvoChains[i].chain.evolves_to[0].evolves_to[0] ? allEvoChains[i].chain.evolves_to[0].evolves_to[0].species.url : '';
+    // console.warn(allEvoChains[i].chain.evolves_to[0].evolves_to[0].species.url);
+    // hier der Bereich  Zeile 89 bis 91 frage ich ab, ob es in der evochain auch 2 oder 3 arten gibt hier liegt wahrscheinlich der fehler
+   
+    
+    //hier versuchen, die Bedingung anders zu bauen
+
+
+
+
+
+
+
+    let pullImageN1 = await fetch(EvoImageUrl1);
+    let pullResult1 = await pullImageN1.json();
+
+    let pullImageN2 = await fetch(EvoImageUrl2);
+    let pullResult2 = await pullImageN2.json();
+    
+    let pullImageN3 = await fetch(EvoImageUrl3);
+    let pullResult3 = await pullImageN3.json();
+
+    ;
+    // console.log(pullResult);
+
+    let rootImageUrl1 = pullResult1.varieties[0].pokemon.url;
+    let rootImagefetch = await fetch(rootImageUrl1);
+    let rootResult1 = await rootImagefetch.json();
+
+    let rootImageUrl2 = pullResult2.varieties[0].pokemon.url;
+    let rootImagefetch2 = await fetch(rootImageUrl2);
+    let rootResult2 = await rootImagefetch2.json();
+
+    let rootImageUrl3 = pullResult3.varieties[0].pokemon.url;
+    let rootImagefetch3 = await fetch(rootImageUrl3);
+    let rootResult3 = await rootImagefetch3.json();
+    
+    
+
+    
+    evocontainer.innerHTML = `
     <table>
     <tr>
+        <td><img src="${rootResult1.sprites.other.dream_world['front_default']}">${allPokemon[index].id}</td>
         <td></td>
+        <td><img src="${rootResult2.sprites.other.dream_world['front_default'] ? rootResult2.sprites.other.dream_world['front_default'] : ''}"</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><img src="${rootResult3.sprites.other.dream_world['front_default'] ? rootResult3.sprites.other.dream_world['front_default'] : ''}"</td>
     <tr>
     <tr>
-        <td> ${allEvoChains[index++].chain.species.name}</td>
-        <td>${allEvoChains[index++].chain.evolves_to[0].species.name}</td>
-        <td>${allEvoChains[index++].chain.evolves_to[0].evolves_to[0].species.name}</td>
+        <td> ${allEvoChains[i].chain.species.name}</td>
+        <td>${allEvoChains[i].chain.evolves_to[0].species.name}</td>
+        <td>${allEvoChains[i].chain.evolves_to[0].evolves_to[0] ? allEvoChains[i].chain.evolves_to[0].evolves_to[0].species.name : ''} </td>
     <tr>
-    </table>` 
-    }
-    
-    
+    </table>`; console.log('try it')
+
+
+
 };
 
 // window.toggleOverlayWindow = toggleOverlayWindow;  von rechts nach links soll die funktion toggleOverlayWindow mit dem Window tag global machen
@@ -122,4 +166,3 @@ function showEvochain(index){
 //     <td><h3>:${allPokemon[firstPokemonIndex].abilities[0].ability.name} ${allPokemon[firstPokemonIndex].abilities[1] ? `${allPokemon[firstPokemonIndex].abilities[1].ability.name}` : ''}</h3></td>
 //     </tr>
 //     </table>
-    
