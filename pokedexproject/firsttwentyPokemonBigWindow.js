@@ -9,7 +9,7 @@ function toggleOverlayWindow() {
 function overlayWindowdiv(firstPokemonIndex) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
     conectionToOverlaydiv.innerHTML = `<div  class="pokemonNameOverlay">
-    <h4>#${firstPokemonIndex + 1}</h4> <h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/delete_button.png">
+    <h4>#${firstPokemonIndex + 1}</h4> <h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/close_button.png">
     </div>
     <div class="ImageContainerOverlay ${allPokemon[firstPokemonIndex].types[0].type.name}-Img">
     <img src="${allPokemon[firstPokemonIndex].sprites.other.dream_world['front_default']}">
@@ -81,119 +81,76 @@ function showMain(firstPokemonIndex) {
 }
 
 
-
-
-async function showEvochain(index) {
+let ImageResultArray = [];
+async function showEvochain(firstPokemonIndex) {
+    ImageResultArray = [];
     firstfetchArray = [];
     secondfetchArray = [];
-    let specialindex = Math.floor(index / 3);
-    let i = specialindex;
+    
 
-    let fetchData = [
-        allEvoChains[i].chain.species.url,
-        allEvoChains[i].chain.evolves_to[0].species.url,
-        allEvoChains[i].chain.evolves_to[0].evolves_to[0] ? allEvoChains[i].chain.evolves_to[0].evolves_to[0].species.url : ''];
+    let evoUrl = `https://pokeapi.co/api/v2/pokemon-species/${firstPokemonIndex + 1}/`
 
-    fetchAll(fetchData, firstfetchArray, i);
+    //order to fetch - pokemon-species/ => pokemon/1/
+    //die Evolution Chain nur von diesem Pokemon holen und dann abfragen
+    // oder ich füge die direkte Url wie in Zeile 91 für die Bilder ein gekoppelt mit dem richtigen Index
+    //jedoch musst du schauen, ob mit der methode die If-abfrage noch funktioniert
+
+    let evoFetch = await fetch(evoUrl);
+    let resultAsJson = await evoFetch.json();
+    console.log(resultAsJson);
+
+    let secondFetch = await fetch(resultAsJson.evolution_chain.url);
+    let evoChainAsJson = await secondFetch.json();
+    console.log(evoChainAsJson); //here we have all names of the chain but not the pictures
+
+    let nameArray = [
+        evoChainAsJson.chain.species.name,
+        evoChainAsJson.chain.evolves_to[0].species.name,
+        evoChainAsJson.chain.evolves_to[0].evolves_to[0] ? evoChainAsJson.chain.evolves_to[0].evolves_to[0].species.name : null
+    ]
+    
+    let realName = nameArray.filter(name => name !== null);
+
+    
+        for (let ImageIndex = 0; ImageIndex < realName.length; ImageIndex++) {
+
+            let pokemonImageUrl = `https://pokeapi.co/api/v2/pokemon/${realName[ImageIndex]}/`;
+            // console.log(pokemonImageUrl);
+
+            let fetchEvoImage = await fetch(pokemonImageUrl);
+            let ImageResultAsJson = await fetchEvoImage.json();
+            ImageResultArray.push(ImageResultAsJson);
+            console.log(ImageResultAsJson);
+            
+        }
+ await showEvoImage(evoChainAsJson, ImageResultArray);
+    
+
 };
 
-async function fetchAll(fetchData, firstfetchArray, i) {
-    if (fetchData[2] === '') {
-        await fetchSpecialFamily(fetchData, firstfetchArray);
-        await secondFetchStep(fetchData, firstfetchArray);
-    } else {
-        await fetchNormalFamily(fetchData, firstfetchArray);
-        await secondFetchStep(fetchData, firstfetchArray);
-    }
-    await showEvoImage(secondfetchArray, i);
-};
 
-
-
-async function fetchSpecialFamily(fetchData, firstfetchArray) {
-    for (let index = 0; index < 2; index++) {
-        let FirstFetch = await fetch(fetchData[index]);
-        let resultAsJsonFirst = await FirstFetch.json();    // new result
-        firstfetchArray.push(resultAsJsonFirst);
-    }
-};
-
-async function fetchNormalFamily(fetchData, firstfetchArray) {
-    for (let index = 0; index < fetchData.length; index++) {
-        let FirstFetch = await fetch(fetchData[index]);
-        let resultAsJsonFirst = await FirstFetch.json();    // new result
-        firstfetchArray.push(resultAsJsonFirst);
-    }
-}
-
-async function secondFetchStep() {
-    for (let index = 0; index < firstfetchArray.length; index++) {
-        let stepInBetween = firstfetchArray[index].varieties[0].pokemon.url;
-        let SecondFetch = await fetch(stepInBetween);
-        let resultAsJsonSecond = await SecondFetch.json(); // again new result
-        secondfetchArray.push(resultAsJsonSecond);
-    }
-}
-
-
-// let pullImageN1 = await fetch(EvoImageUrl1);
-// let pullResult1 = await pullImageN1.json();
-
-// let pullImageN2 = await fetch(EvoImageUrl2);
-// let pullResult2 = await pullImageN2.json();
-
-
-// console.log(pullResult);
-
-// let rootImageUrl1 = pullResult1.varieties[0].pokemon.url;
-// let rootImagefetch = await fetch(rootImageUrl1);
-// let rootResult1 = await rootImagefetch.json();
-
-// let rootImageUrl2 = pullResult2.varieties[0].pokemon.url;
-// let rootImagefetch2 = await fetch(rootImageUrl2);
-// let rootResult2 = await rootImagefetch2.json();
-
-
-// let pullImageN3 = await fetch(EvoImageUrl3);
-// let pullResult3 = await pullImageN3.json();
-// let rootImageUrl3 = pullResult3.varieties[0].pokemon.url;
-// let rootImagefetch3 = await fetch(rootImageUrl3);
-// let rootResult3 = await rootImagefetch3.json();
-
-async function showEvoImage(secondfetchArray, i) {
+async function showEvoImage(evoChainAsJson, ImageResultArray) {
     let evocontainer = document.getElementById('pokemondetails')
     evocontainer.innerHTML = `
     <table>
     <tr>
-        <td><img src="${secondfetchArray[0].sprites.other.dream_world['front_default']}"></td>
+        <td><img src="${ImageResultArray[0].sprites['front_default']}"></td>
         <td></td>
-        <td><img src="${secondfetchArray[1] ? secondfetchArray[1].sprites.other.dream_world['front_default'] : ''}"</td>
+        <td><img src="${ImageResultArray[1].sprites['front_default']}"</td>
         <td></td>
-        <td><img src="${secondfetchArray[2] ? secondfetchArray[2].sprites.other.dream_world['front_default'] : ''}"</td>
+        <td><img src="${ImageResultArray[2] ? ImageResultArray[2].sprites['front_default'] : ''}"</td>
     <tr>
     <tr>
-        <td> ${allEvoChains[i].chain.species.name}</td>
-        <td>${allEvoChains[i].chain.evolves_to[0].species.name}</td>
-        <td>${allEvoChains[i].chain.evolves_to[0].evolves_to[0] ? allEvoChains[i].chain.evolves_to[0].evolves_to[0].species.name : ''} </td>
+        <td> ${evoChainAsJson.chain.species.name}</td>
+        <td>${evoChainAsJson.chain.evolves_to[0].species.name}</td>
+        <td>${evoChainAsJson.chain.evolves_to[0].evolves_to[0] ? evoChainAsJson.chain.evolves_to[0].evolves_to[0].species.name : ''} </td>
     <tr>
-    </table>`; console.log('try it')
+    </table>`;
+
+    console.log('try it')
 };
 
 // window.toggleOverlayWindow = toggleOverlayWindow;  von rechts nach links soll die funktion toggleOverlayWindow mit dem Window tag global machen
 
 
-// <td><h3>: ${allPokemon[firstPokemonIndex].height}</h3></td>
-//     </tr>
-//     <tr>
-//     <td><h3>weight</h3></td>
-//     <td><h3>: ${allPokemon[firstPokemonIndex].weight}</h3></td>
-//     </tr>
-//     <tr>
-//     <td><h3>Base esperience</h3></td>
-//     <td><h3>: ${allPokemon[firstPokemonIndex].base_experience}</h3></td>
-//     </tr>
-//     <tr>
-//     <td><h3>abilitys</h3></td>
-//     <td><h3>:${allPokemon[firstPokemonIndex].abilities[0].ability.name} ${allPokemon[firstPokemonIndex].abilities[1] ? `${allPokemon[firstPokemonIndex].abilities[1].ability.name}` : ''}</h3></td>
-//     </tr>
-//     </table>
+
