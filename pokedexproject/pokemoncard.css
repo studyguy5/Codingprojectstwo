@@ -74,6 +74,30 @@
     background-color: lightblue;
 }
 
+.poison-Img{
+    background-color: rgb(138, 52, 52);
+}
+
+.fighting-Img{
+    background-color: gold;
+}
+
+.rock-Img{
+    background-color: brown;
+}
+
+.psychic-Img{
+    background-color: lightsalmon;
+}
+
+.ghost-Img{
+    background-color: grey;
+}
+
+.dark-Img{
+    background-color: darkgrey;
+}
+
 
 .ImageContainer img {
     width: 95%;
