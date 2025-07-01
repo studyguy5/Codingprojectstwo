@@ -4,75 +4,85 @@ function toggleOverlayWindow() {
     Overlay.classList.toggle('dont_show')
 };
 
-function NextoverlayWindowdiv(i) {
+function NextoverlayWindowdiv(cs) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
     conectionToOverlaydiv.innerHTML = `<div  class="pokemonNameOverlay">
-    <h4>#${i + 1}</h4> <h3>${allPokemon[i].name}</h3><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/close_button.png">
+    <h4>#${cs + 1}</h4><div class="buttonfield"><img onclick="skipTOPREVIOUS(${cs})"; class="skipToPrevious" id="skiptoprevious" src="./images/icons/skipToPrevious.png"><h3>${allPokemon[cs].name}</h3><img onclick="skipTONEXT(${cs})"; class="skipToNext" id="skiptonext" src="./images/icons/skipToNext.png"></div><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/close_button.png">
     </div>
-    <div class="ImageContainerOverlay ${allPokemon[i].types[0].type.name}-Img">
-    <img src="${allPokemon[i].sprites.other.dream_world['front_default']}">
+    <div class="ImageContainerOverlay ${allPokemon[cs].types[0].type.name}-Img">
+    <img src="${allPokemon[cs].sprites.other.dream_world['front_default']}">
     </div>
     <div class="mainInfoCategoriesOverlay">
-    <h4 onclick="showNextMain(${i})" >main</h4><hr><h4 onclick="showNextstats(${i})">stats</h4><hr><h4 onclick="showNextEvochain(${i})">evo-chain</h4>
+    <h4 onclick="showNextMain(${cs})" >main</h4><hr><h4 onclick="showNextstats(${cs})">stats</h4><hr><h4 onclick="showNextEvochain(${cs})">evo-chain</h4>
     </div>
     <div class="pokemondetails" id="pokemondetails">
     </div>
    `
-    showMain(i);
+    showMain(cs);
     
 };
 
-function showNextstats(i) {
+function skipTONEXT(cs){
+    cs++
+    NextoverlayWindowdiv(cs);
+}
+
+function skipTOPREVIOUS(cs){
+    cs--
+    NextoverlayWindowdiv(cs);
+}
+
+function showNextstats(cs) {
     let statscontainer = document.getElementById('pokemondetails')
     statscontainer.innerHTML = `<div>
     <table>
     <tr>
-        <td><h3>${allPokemon[i].stats[0].stat.name}</h3></td>
-        <td>${allPokemon[i].stats[0].base_stat}</td>
+        <td><h3>${allPokemon[cs].stats[0].stat.name}</h3></td>
+        <td>${allPokemon[cs].stats[0].base_stat}</td>
     </tr>
     <tr>
-        <td><h3>${allPokemon[i].stats[1].stat.name}</h3></td>
-        <td>${allPokemon[i].stats[1].base_stat}</td>
+        <td><h3>${allPokemon[cs].stats[1].stat.name}</h3></td>
+        <td>${allPokemon[cs].stats[1].base_stat}</td>
     </tr>
     <tr>
-        <td><h3>${allPokemon[i].stats[2].stat.name}</h3></td>
-        <td>${allPokemon[i].stats[2].base_stat}</td>
+        <td><h3>${allPokemon[cs].stats[2].stat.name}</h3></td>
+        <td>${allPokemon[csi].stats[2].base_stat}</td>
     </tr>
     <tr>
-        <td><h3>${allPokemon[i].stats[3].stat.name}</h3></td>
-        <td>${allPokemon[i].stats[3].base_stat}</td>
+        <td><h3>${allPokemon[cs].stats[3].stat.name}</h3></td>
+        <td>${allPokemon[cs].stats[3].base_stat}</td>
     </tr>
     <tr>
-        <td><h3>${allPokemon[i].stats[4].stat.name}</h3></td>
-        <td>${allPokemon[i].stats[4].base_stat}</td>
+        <td><h3>${allPokemon[cs].stats[4].stat.name}</h3></td>
+        <td>${allPokemon[cs].stats[4].base_stat}</td>
     </tr>
     <tr>
-        <td><h3>${allPokemon[i].stats[5].stat.name}</h3></td>
-        <td>${allPokemon[i].stats[5].base_stat}</td>
+        <td><h3>${allPokemon[cs].stats[5].stat.name}</h3></td>
+        <td>${allPokemon[cs].stats[5].base_stat}</td>
     </tr>
     </div>
     `
 }
 
-function showNextMain(i) {
+function showNextMain(cs) {
     let maincontainer = document.getElementById('pokemondetails')
     maincontainer.innerHTML = `
     <table>
     <tr>
         <td><h3>Height</h3></td>
-        <td><h3>${allPokemon[i].height}</h3></td>
+        <td><h3>${allPokemon[cs].height}</h3></td>
     </tr>
     <tr>
         <td><h3>weight</h3></td>
-        <td><h3>${allPokemon[i].weight}</h3></td>
+        <td><h3>${allPokemon[cs].weight}</h3></td>
     </tr>
     <tr>
         <td><h3>Base esperience</h3></td>
-        <td><h3>${allPokemon[i].base_experience}</h3></td>
+        <td><h3>${allPokemon[cs].base_experience}</h3></td>
     </tr>
     <tr>
         <td><h3>abilitys</h3></td>
-        <td><h3>${allPokemon[i].abilities[0].ability.name} ${allPokemon[i].abilities[1] ? `${allPokemon[i].abilities[1].ability.name}` : ''}</h3></td>
+        <td><h3>${allPokemon[cs].abilities[0].ability.name} ${allPokemon[cs].abilities[1] ? `${allPokemon[cs].abilities[1].ability.name}` : ''}</h3></td>
     </tr>
     `
 }
@@ -152,11 +162,11 @@ async function showNextEvoImage(SecondResultAsJson, NextImageResultArray) {
     evocontainer.innerHTML = `
     <table>
     <tr>
-        <td><img src="${NextImageResultArray[0].sprites.other.dream_world['front_default']}"></td>
+        <td><img src="${NextImageResultArray[0].sprites['front_default']}"></td>
         <td></td>
-        <td><img src="${NextImageResultArray[1].sprites.other.dream_world['front_default']}"</td>
+        <td><img src="${NextImageResultArray[1].sprites['front_default']}"</td>
         <td></td>
-        <td><img src="${NextImageResultArray[2] ? NextImageResultArray[2].sprites.other.dream_world['front_default'] : ''}"</td>
+        <td><img src="${NextImageResultArray[2] ? NextImageResultArray[2].sprites['front_default'] : ''}"</td>
     <tr>
     <tr>
         <td> ${SecondResultAsJson.chain.species.name}</td>
