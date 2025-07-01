@@ -1,6 +1,7 @@
 let firstfetchArray = [];
 let secondfetchArray = [];
 
+
 function toggleOverlayWindow() {
     let Overlay = document.getElementById('OverlayWindow')
     Overlay.classList.toggle('dont_show')
@@ -8,8 +9,9 @@ function toggleOverlayWindow() {
 
 function overlayWindowdiv(firstPokemonIndex) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
+    
     conectionToOverlaydiv.innerHTML = `<div  class="pokemonNameOverlay">
-    <h4>#${firstPokemonIndex + 1}</h4> <h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/close_button.png">
+    <h4>#${firstPokemonIndex + 1}</h4><div class="buttonfield"><img onclick="skipToPrevious(${firstPokemonIndex})"; class="skipToPrevious" id="skiptoprevious" src="./images/icons/skipToPrevious.png"><h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="skipToNext(${firstPokemonIndex})"; class="skipToNext" id="skiptonext" src="./images/icons/skipToNext.png"></div><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/close_button.png">
     </div>
     <div class="ImageContainerOverlay ${allPokemon[firstPokemonIndex].types[0].type.name}-Img">
     <img src="${allPokemon[firstPokemonIndex].sprites.other.dream_world['front_default']}">
@@ -21,9 +23,19 @@ function overlayWindowdiv(firstPokemonIndex) {
     </div>
    `
     showMain(firstPokemonIndex);
-    console.log('funktion arbeitet');
+    
 };
 
+
+function skipToNext(firstPokemonIndex){
+    firstPokemonIndex++
+    overlayWindowdiv(firstPokemonIndex);
+}
+
+function skipToPrevious(firstPokemonIndex){
+    firstPokemonIndex--
+    overlayWindowdiv(firstPokemonIndex);
+}
 
 function showstats(firstPokemonIndex) {
     let statscontainer = document.getElementById('pokemondetails')
