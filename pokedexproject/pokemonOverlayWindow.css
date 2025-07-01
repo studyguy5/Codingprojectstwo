@@ -1,0 +1,113 @@
+.OverlayWindow {
+    width: 400px;
+
+    border: 2px solid red;
+    border-radius: 10px;
+    /*centre the div with 50% left the left top corner and move it 50%(200px) of the own width to the left to centre it*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.dont_show {
+    display: none;
+}
+
+.pokemonNameOverlay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: rgb(21, 21, 177);
+    border-radius: 8px;
+}
+
+#skiptoprevious {
+    margin-right:10px;
+    display: flex;
+    justify-content: center;
+    width: 20px;
+    height: 15px;
+    
+}
+
+#skiptonext {
+    margin-left:10px;
+    display:flex;
+    justify-content: center;
+    width: 20px;
+    height: 15px;
+}
+
+.buttonfield {
+    display: flex;
+    align-items: center;
+}
+
+.pokemonNameOverlay h4 {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.ImageContainerOverlay {
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+.mainInfoCategoriesOverlay {
+    background-color: rgb(46, 49, 197);
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 0px;
+
+}
+
+.mainInfoCategoriesOverlay hr {
+    height: 34px;
+    width: 5px;
+    margin-bottom: 10px;
+    border: 2px solid black;
+    box-shadow: 0px 25px 25px rgb(118, 118, 199);
+}
+
+.mainInfoCategoriesOverlay h4 {
+    margin-left: 30px;
+    margin-right: 30px;
+
+    color: white;
+}
+
+.mainInfoCategoriesOverlay h4:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.pokemondetails {
+    border-radius: 10px;
+    margin-top: 0px;
+    background-color: green;
+
+}
+
+.pokemondetails table {
+    margin-top: 0px;
+    width: 320px;
+    margin-left: 40px;
+}
+
+.CloseButton {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 2px solid yellow;
+}
