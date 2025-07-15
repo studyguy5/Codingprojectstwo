@@ -1,6 +1,6 @@
 .OverlayWindow {
     width: 400px;
-
+    
     border: 2px solid red;
     border-radius: 10px;
     /*centre the div with 50% left the left top corner and move it 50%(200px) of the own width to the left to centre it*/
@@ -8,7 +8,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000;
+    
 }
 
 .dont_show {
@@ -41,6 +41,10 @@
     height: 15px;
 }
 
+.arrowImage{
+    width:35px;
+}
+
 .buttonfield {
     display: flex;
     align-items: center;
@@ -55,7 +59,7 @@
 }
 
 .ImageContainerOverlay {
-    height: 260px;
+    height: 220px;
     display: flex;
     justify-content: center;
     border: 1px solid red;
@@ -94,15 +98,18 @@
 .pokemondetails {
     border-radius: 10px;
     margin-top: 0px;
-    background-color: green;
+    background-color: rgb(107, 126, 24);
 
 }
 
 .pokemondetails table {
     margin-top: 0px;
-    width: 320px;
-    margin-left: 40px;
+    width: 400px;
+    margin-left: 5px;
 }
+
+
+
 
 .CloseButton {
     width: 20px;
