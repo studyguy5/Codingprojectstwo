@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon-Viewer</title>
+    <link rel="icon" href="./images/icons/Pokemon-Favicon.ico">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./pokemoncard.css">
     <link rel="stylesheet" href="./pokemonOverlayWindow.css">
@@ -11,32 +13,37 @@
     <script src="./firsttwentyPokemonBigWindow.js"></script>
     <script src="./nexttwentyPokemonBigWindow.js"></script>
 </head>
+
 <body onload="init()">
-<div class="header-fullsize">
-    <header class="header-section-content">
-    <div class="header-logo">
-        <img src="./images/img/header-pokemonball.png">
-        <h2>Pokedex</h2>
+    <div class="header-fullsize">
+        <header class="header-section-content">
+            <div class="header-logo">
+                <img src="./images/img/header-pokemonball.png">
+                <h2>Pokedex</h2>
+            </div>
+            <div class="header-searchbar">
+                <input id="filterinput" oninput="filterArray()" minlength="4" type="search"
+                    placeholder="search here...">
+            </div><!--<button onclick="renderPokemon()">Try</button>-->
+        </header>
     </div>
-        <div class="header-searchbar">
-            <input type="text"placeholder="search here...">
-        </div><!--<button onclick="renderPokemon()">Try</button>-->
-    </header>
-</div>
-<main class="main-section-fullsize">
-    
-    <div class="OverlayWindow dont_show" id="OverlayWindow">
-    </div>
-    
-<div class="main-section-content" id="main-section-content">
-      
-</div>
-<button onclick="getNextUrlSet()">Load Next Pokemon</button>
-</main>
-<footer class="footer-fullsize">
-    <footer class="footer-content">
-        <img src="./images/img/developer-akademie-logo.png" alt="developer-akademie-logo">
+    <main class="main-section-fullsize">
+        <div onclick="toggleOverlayWrapper()" class="wrapper dont_show" id="Overlaywrapper">
+            <div onclick="event.stopPropagation()" class="OverlayWindow" id="OverlayWindow">
+            </div>
+        </div>
+        <div class="main-section-content" id="main-section-content">
+        </div>
+        
+        <img src="./images/img/pokemonball.png" alt="LoadingSpinner" id="loadingSpinner"
+            class="loadingSpinner dont-Show">
+        <button id="buttonId" onclick="getNextUrlSet()">Load Next Pokemon</button>
+    </main>
+    <footer class="footer-fullsize">
+        <footer class="footer-content">
+            <img src="./images/img/developer-akademie-logo.png" alt="developer-akademie-logo">
+        </footer>
     </footer>
-</footer>
 </body>
+
 </html>
