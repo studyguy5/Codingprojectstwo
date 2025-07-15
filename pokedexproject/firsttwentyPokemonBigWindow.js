@@ -2,16 +2,13 @@ let firstfetchArray = [];
 let secondfetchArray = [];
 
 
-function toggleOverlayWindow() {
-    let Overlay = document.getElementById('OverlayWindow')
-    Overlay.classList.toggle('dont_show')
-};
+
 
 function overlayWindowdiv(firstPokemonIndex) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
     
     conectionToOverlaydiv.innerHTML = `<div  class="pokemonNameOverlay">
-    <h4>#${firstPokemonIndex + 1}</h4><div class="buttonfield"><img onclick="skipToPrevious(${firstPokemonIndex})"; class="skipToPrevious" id="skiptoprevious" src="./images/icons/skipToPrevious.png"><h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="skipToNext(${firstPokemonIndex})"; class="skipToNext" id="skiptonext" src="./images/icons/skipToNext.png"></div><img onclick="toggleOverlayWindow()" class="CloseButton" src="./images/img/close_button.png">
+    <h4>#${firstPokemonIndex + 1}</h4><div class="buttonfield"><img onclick="skipToPrevious(${firstPokemonIndex})"; class="skipToPrevious" id="skiptoprevious" src="./images/icons/skipToPrevious.png"><h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="skipToNext(${firstPokemonIndex})"; class="skipToNext" id="skiptonext" src="./images/icons/skipToNext.png"></div><img onclick="toggleOverlayWrapper(${firstPokemonIndex})" class="CloseButton" src="./images/img/close_button.png">
     </div>
     <div class="ImageContainerOverlay ${allPokemon[firstPokemonIndex].types[0].type.name}-Img">
     <img src="${allPokemon[firstPokemonIndex].sprites.other.dream_world['front_default']}">
@@ -37,37 +34,7 @@ function skipToPrevious(firstPokemonIndex){
     overlayWindowdiv(firstPokemonIndex);
 }
 
-function showstats(firstPokemonIndex) {
-    let statscontainer = document.getElementById('pokemondetails')
-    statscontainer.innerHTML = `<div>
-    <table>
-    <tr>
-        <td><h3>${allPokemon[firstPokemonIndex].stats[0].stat.name}</h3></td>
-        <td>${allPokemon[firstPokemonIndex].stats[0].base_stat}</td>
-    </tr>
-    <tr>
-        <td><h3>${allPokemon[firstPokemonIndex].stats[1].stat.name}</h3></td>
-        <td>${allPokemon[firstPokemonIndex].stats[1].base_stat}</td>
-    </tr>
-    <tr>
-        <td><h3>${allPokemon[firstPokemonIndex].stats[2].stat.name}</h3></td>
-        <td>${allPokemon[firstPokemonIndex].stats[2].base_stat}</td>
-    </tr>
-    <tr>
-        <td><h3>${allPokemon[firstPokemonIndex].stats[3].stat.name}</h3></td>
-        <td>${allPokemon[firstPokemonIndex].stats[3].base_stat}</td>
-    </tr>
-    <tr>
-        <td><h3>${allPokemon[firstPokemonIndex].stats[4].stat.name}</h3></td>
-        <td>${allPokemon[firstPokemonIndex].stats[4].base_stat}</td>
-    </tr>
-    <tr>
-        <td><h3>${allPokemon[firstPokemonIndex].stats[5].stat.name}</h3></td>
-        <td>${allPokemon[firstPokemonIndex].stats[5].base_stat}</td>
-    </tr>
-    </div>
-    `
-}
+
 
 function showMain(firstPokemonIndex) {
     let maincontainer = document.getElementById('pokemondetails')
@@ -92,6 +59,77 @@ function showMain(firstPokemonIndex) {
     `
 }
 
+function showstats(firstPokemonIndex) {
+
+    let barX = 10;
+    let barY = 25;
+    let barwidth = 150;
+    let barheight = 30;
+
+    let textX = (barX + barwidth) / 2;
+    let textY = (barY + barheight) / 2;
+
+    let statscontainer = document.getElementById('pokemondetails')
+    statscontainer.innerHTML = `<div>
+    <table>
+    <tr>
+        <td><h3>${allPokemon[firstPokemonIndex].stats[0].stat.name}</h3></td>
+        <td><svg width="160" height="45">
+        <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[firstPokemonIndex].stats[0].base_stat)}" height="26" fill="darkgray"/>
+        <text x="${textX}" y="${textY}" fill="black" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[firstPokemonIndex].stats[0].base_stat}
+  </text>
+        </svg></td>
+    </tr>
+    <tr>
+        <td><h3>${allPokemon[firstPokemonIndex].stats[1].stat.name}</h3></td>
+        <td><svg width="160" height="45">
+        <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[firstPokemonIndex].stats[1].base_stat)}" height="26" fill="darkgray"/>
+        <text x="${textX}" y="${textY}" fill="black" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[firstPokemonIndex].stats[1].base_stat}
+  </text></svg></td>
+    </tr>
+    <tr>
+        <td><h3>${allPokemon[firstPokemonIndex].stats[2].stat.name}</h3></td>
+        <td><svg width="160" height="45">
+        <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[firstPokemonIndex].stats[2].base_stat)}" height="26" fill="darkgray"/>
+        <text x="${textX}" y="${textY}" fill="black" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[firstPokemonIndex].stats[2].base_stat}
+  </text></svg></td>
+    </tr>
+    <tr>
+        <td><h3>${allPokemon[firstPokemonIndex].stats[3].stat.name}</h3></td>
+        <td><svg width="160" height="45">
+        <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[firstPokemonIndex].stats[3].base_stat)}" height="26" fill="darkgray"/>
+        <text x="${textX}" y="${textY}" fill="black" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[firstPokemonIndex].stats[3].base_stat}
+  </text></svg></td>
+    </tr>
+    <tr>
+        <td><h3>${allPokemon[firstPokemonIndex].stats[4].stat.name}</h3></td>
+        <td><svg width="160" height="45">
+        <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[firstPokemonIndex].stats[4].base_stat)}" height="26" fill="darkgray"/>
+        <text x="${textX}" y="${textY}" fill="black" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[firstPokemonIndex].stats[4].base_stat}
+  </text></svg></td>
+    </tr>
+    <tr>
+        <td><h3>${allPokemon[firstPokemonIndex].stats[5].stat.name}</h3></td>
+        <td><svg width="160" height="45">
+        <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[firstPokemonIndex].stats[5].base_stat)}" height="26" fill="darkgray"/>
+        <text x="${textX}" y="${textY}" fill="black" font-size="18" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[firstPokemonIndex].stats[5].base_stat}
+  </text></svg></td>
+    </tr>
+    </div>
+    `
+}
 
 let ImageResultArray = [];
 async function showEvochain(firstPokemonIndex) {
@@ -147,9 +185,9 @@ async function showEvoImage(evoChainAsJson, ImageResultArray) {
     <table>
     <tr>
         <td><img src="${ImageResultArray[0].sprites['front_default']}"></td>
-        <td></td>
+        <td><img class="arrowImage" src="./images/img/arrow-blue.png"></td>
         <td><img src="${ImageResultArray[1].sprites['front_default']}"</td>
-        <td></td>
+        <td><img class="arrowImage" src="./images/img/arrow-blue.png"></td>
         <td><img src="${ImageResultArray[2] ? ImageResultArray[2].sprites['front_default'] : ''}"</td>
     <tr>
     <tr>
