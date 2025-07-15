@@ -3,7 +3,13 @@
     width: 260px;
     height: 320px;
     border: 2px solid blue;
+    border-radius: 10px;
+}
 
+.pokemoncontainer:hover{
+    transition: 0.25s ease-out;
+    transform:scale(1.05); 
+    box-shadow: 3px 3px 8px white, -3px -3px 8px white;
 }
 
 .pokemonName {
@@ -27,7 +33,6 @@
     height: 180px;
     display: flex;
     justify-content: center;
-    border: 1px solid red;
 }
 
 .fire-Img {
@@ -109,6 +114,8 @@
     align-items: center;
     width: 260px;
     height: 80px;
+    background-color: rgb(124, 116, 45);
+    border-radius: 0px 0px 10px 10px;
 }
 
 .type-button-area img {
