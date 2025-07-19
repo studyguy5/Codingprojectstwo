@@ -1,12 +1,8 @@
 let firstfetchArray = [];
 let secondfetchArray = [];
 
-
-
-
 function overlayWindowdiv(firstPokemonIndex) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
-    
     conectionToOverlaydiv.innerHTML = `<div  class="pokemonNameOverlay">
     <h4>#${firstPokemonIndex + 1}</h4><div class="buttonfield"><img onclick="skipToPrevious(${firstPokemonIndex})"; class="skipToPrevious" id="skiptoprevious" src="./images/icons/skipToPrevious.png"><h3>${allPokemon[firstPokemonIndex].name}</h3><img onclick="skipToNext(${firstPokemonIndex})"; class="skipToNext" id="skiptonext" src="./images/icons/skipToNext.png"></div><img onclick="toggleOverlayWrapper(${firstPokemonIndex})" class="CloseButton" src="./images/img/close_button.png">
     </div>
@@ -20,7 +16,6 @@ function overlayWindowdiv(firstPokemonIndex) {
     </div>
    `
     showMain(firstPokemonIndex);
-    
 };
 
 
@@ -55,12 +50,10 @@ function showMain(firstPokemonIndex) {
     <tr>
         <td><h3>abilitys</h3></td>
         <td><h3>${allPokemon[firstPokemonIndex].abilities[0].ability.name} ${allPokemon[firstPokemonIndex].abilities[1] ? `${allPokemon[firstPokemonIndex].abilities[1].ability.name}` : ''}</h3></td>
-    </tr>
-    `
+    </tr>`
 }
 
 function showstats(firstPokemonIndex) {
-
     let barX = 10;
     let barY = 25;
     let barwidth = 150;
@@ -132,18 +125,13 @@ function showstats(firstPokemonIndex) {
 }
 
 let ImageResultArray = [];
+
 async function showEvochain(firstPokemonIndex) {
     ImageResultArray = [];
     firstfetchArray = [];
     secondfetchArray = [];
     
-
     let evoUrl = `https://pokeapi.co/api/v2/pokemon-species/${firstPokemonIndex + 1}/`
-
-    //order to fetch - pokemon-species/ => pokemon/1/
-    //die Evolution Chain nur von diesem Pokemon holen und dann abfragen
-    // oder ich füge die direkte Url wie in Zeile 91 für die Bilder ein gekoppelt mit dem richtigen Index
-    //jedoch musst du schauen, ob mit der methode die If-abfrage noch funktioniert
 
     let evoFetch = await fetch(evoUrl);
     let resultAsJson = await evoFetch.json();
@@ -161,21 +149,13 @@ async function showEvochain(firstPokemonIndex) {
     
     let realName = nameArray.filter(name => name !== null);
 
-    
         for (let ImageIndex = 0; ImageIndex < realName.length; ImageIndex++) {
-
             let pokemonImageUrl = `https://pokeapi.co/api/v2/pokemon/${realName[ImageIndex]}/`;
-            // console.log(pokemonImageUrl);
-
             let fetchEvoImage = await fetch(pokemonImageUrl);
             let ImageResultAsJson = await fetchEvoImage.json();
-            ImageResultArray.push(ImageResultAsJson);
-            console.log(ImageResultAsJson);
-            
+            ImageResultArray.push(ImageResultAsJson);   
         }
  await showEvoImage(evoChainAsJson, ImageResultArray);
-    
-
 };
 
 
@@ -197,10 +177,7 @@ async function showEvoImage(evoChainAsJson, ImageResultArray) {
         <td></td>
         ${evoChainAsJson.chain.evolves_to[0].evolves_to[0] ? `<td>${evoChainAsJson.chain.evolves_to[0].evolves_to[0].species.name}</td>` : ''}
     </tr>
-    
     </table>`;
-
-    console.log('try it')
 };
 
 // window.toggleOverlayWindow = toggleOverlayWindow;  von rechts nach links soll die funktion toggleOverlayWindow mit dem Window tag global machen

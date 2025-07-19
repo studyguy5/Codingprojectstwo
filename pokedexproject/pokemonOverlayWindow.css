@@ -84,7 +84,6 @@
 .mainInfoCategoriesOverlay h4 {
     margin-left: 30px;
     margin-right: 30px;
-
     color: white;
 }
 
@@ -97,13 +96,11 @@
     border-radius: 10px;
     margin-top: 0px;
     background-color: rgb(107, 126, 24);
-
 }
 
 .pokemondetails table {
     margin-top: 0px;
     width: 400px;
-
 }
 
 .pokemondetails td {
@@ -116,9 +113,6 @@
 .pokemondetails img {
     height: auto;
 }
-
-
-
 
 .CloseButton {
     width: 20px;
@@ -150,7 +144,6 @@
     }
 
     .pokemondetails td {
-
         width: 40px;
         font-size: 14px;
         font-weight: bold;

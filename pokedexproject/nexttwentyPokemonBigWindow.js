@@ -1,6 +1,4 @@
 
-
-
 function NextoverlayWindowdiv(cs) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
     conectionToOverlaydiv.innerHTML = `<div  class="pokemonNameOverlay">
@@ -14,9 +12,8 @@ function NextoverlayWindowdiv(cs) {
     </div>
     <div class="pokemondetails" id="pokemondetails">
     </div>
-   `
-    showMain(cs);
-
+   ` 
+   showMain(cs);
 };
 
 function skipTONEXT(cs) {
@@ -54,25 +51,13 @@ function showNextMain(cs) {
     `
 }
 
-// let barX = 10;
-// let barY = 10;
-// let barwidth = 150;
-// let barheight = 30;
-
-// let textX = (barX + barwidth) / 2;
-// let textY = (barY + barheight) / 2;
-
 function showNextstats(cs) {
-    allPokemon[cs].stats[0].base_stat;
     let barX = 10;
     let barY = 25;
     let barwidth = 150;
     let barheight = 30;
-
     let textX = (barX + barwidth) / 2;
     let textY = (barY + barheight) / 2;
-
-
     let statscontainer = document.getElementById('pokemondetails')
     statscontainer.innerHTML = `<div>
     <table>
@@ -137,72 +122,34 @@ function showNextstats(cs) {
 }
 
 let NextImageResultArray = [];
+
 async function showNextEvochain(cs) {
     NextImageResultArray = [];
     firstfetchArray = [];
     secondfetchArray = [];
 
-
     let NextevoUrl = `https://pokeapi.co/api/v2/pokemon-species/${cs + 1}/`
-
     let nextPokemonUrl = await fetch(NextevoUrl);
     let resultAsJson = await nextPokemonUrl.json();
     console.log(resultAsJson);
 
     let SecondFetch = await fetch(resultAsJson.evolution_chain.url);
     let SecondResultAsJson = await SecondFetch.json();
-
-
-
+    
     let NextNameArray = [
         SecondResultAsJson.chain.species.name,
         SecondResultAsJson.chain.evolves_to[0].species.name,
         SecondResultAsJson.chain.evolves_to[0].evolves_to[0] ? SecondResultAsJson.chain.evolves_to[0].evolves_to[0].species.name : null];
 
     let realName2 = NextNameArray.filter(name => name !== null)
-
     for (let NextImageIndex = 0; NextImageIndex < realName2.length; NextImageIndex++) {
-
         let NextEvoImageUrl = `https://pokeapi.co/api/v2/pokemon/${realName2[NextImageIndex]}/`;
-
         let fetchNextEvoImage = await fetch(NextEvoImageUrl);
         let NextResultAsjson = await fetchNextEvoImage.json();
         NextImageResultArray.push(NextResultAsjson);
     }
-
     await showNextEvoImage(SecondResultAsJson, NextImageResultArray)
 };
-
-
-
-
-
-// async function fetchNextSpecialFamily(fetchData, firstfetchArray) {
-//     for (let index = 0; index < 2; index++) {
-//         let FirstFetch = await fetch(fetchData[index]);
-//         let resultAsJsonFirst = await FirstFetch.json();    // new result
-//         firstfetchArray.push(resultAsJsonFirst);
-//     }
-
-// };
-
-// async function fetchNextNormalFamily(fetchData, firstfetchArray) {
-//     for (let index = 0; index < fetchData.length; index++) {
-//         let FirstFetch = await fetch(fetchData[index]);
-//         let resultAsJsonFirst = await FirstFetch.json();    // new result
-//         firstfetchArray.push(resultAsJsonFirst);
-//     }
-
-// }
-
-// async function NextsecondFetchStep() {
-//     for (let index = 0; index < firstfetchArray.length; index++) {
-//         let stepInBetween = firstfetchArray[index].varieties[0].pokemon.url;
-//         let SecondFetch = await fetch(stepInBetween);
-//         let resultAsJsonSecond = await SecondFetch.json(); // again new result
-//         secondfetchArray.push(resultAsJsonSecond);
-//     }
-// }
 
 
 async function showNextEvoImage(SecondResultAsJson, NextImageResultArray) {

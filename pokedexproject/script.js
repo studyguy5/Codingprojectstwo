@@ -14,25 +14,23 @@ async function init() {
     getEvolutionChainFromPokemon();
 };
 
-async function filterArray(){
+async function filterArray() {
     let connection = document.getElementById('filterinput').value.toLowerCase();
-    if(connection.length > 2){
-    let filterdArray = allPokemon.filter(allPokemon =>allPokemon.name.toLowerCase().includes(connection))
-    
-    renderfilteredArray(filterdArray);
-    console.log(filterdArray);}else 
-        if(connection.length < 3){
-
-           renderFirstPokemon(); // maybe set getEvolutionchain on init in order to not fetch each time one letter changes in the filter field
-        } 
+    if (connection.length > 2) {
+        let filterdArray = allPokemon.filter(allPokemon => allPokemon.name.toLowerCase().includes(connection))
+        renderfilteredArray(filterdArray);
+        console.log(filterdArray);
+    } else
+        if (connection.length < 3) {
+            renderFirstPokemon(); 
+        }
 }
 
-function renderfilteredArray(filterdArray){
-    
+function renderfilteredArray(filterdArray) {
     let filtercont = document.getElementById('main-section-content')
-    filtercont.innerHTML="";
+    filtercont.innerHTML = "";
     for (let filterIndex = 0; filterIndex < filterdArray.length; filterIndex++) {
-        filtercont.innerHTML +=`
+        filtercont.innerHTML += `
         <div onclick="overlayWindowdiv(${filterIndex}); toggleOverlayWrapper(${filterIndex})" class="pokemoncontainer">
         <div class="pokemonName">
         <h4>#${filterIndex + 1}</h4> <h3>${filterdArray[filterIndex].name}</h3>
@@ -45,17 +43,15 @@ function renderfilteredArray(filterdArray){
         ${filterdArray[filterIndex].types[1] ? `<img class="${filterdArray[filterIndex].types[1].type.name}" src="./images/icons/${filterdArray[filterIndex].types[1].type.name}.svg">` : ''}   
         </div>
         </div>`
-        
     }
 }
 
 function toggleOverlayWrapper() {
     let Overlay = document.getElementById('Overlaywrapper')
     Overlay.classList.toggle('dont_show')
-    
 };
 
-function stopProp(event){
+function stopProp(event) {
     event.stopPropagation();
 }
 
@@ -70,21 +66,18 @@ async function getUrlForPokemon() {
     await getAllPokemon(packageresultAsJson);              // testresult and testAsJson migrate into getAllPokemon, we need only one paramter in getAllPokemon
 };
 
-
-// document.getElementById('buttonId').disabled = false;
-
 async function getNextUrlSet() {
     document.getElementById('buttonId').disabled = true;
     showLoadingAnimation();
     if (offset > 1299) {
         let fetchNextPackage = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=2`);            //fetch the Url Package ich muss das hier dynamisch machen
         let nextUrlAsJson = await fetchNextPackage.json();              //transform into json
-        //let nextUrlContainer = UrlAsJson.next;                  //next Url here offset 20 limit 40
+                          //next Url here offset 20 limit 40
         getAllPokemon(nextUrlAsJson);
     } else {
         let fetchNextPackage = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);            //fetch the Url Package ich muss das hier dynamisch machen
         let nextUrlAsJson = await fetchNextPackage.json();              //transform into json
-        //let nextUrlContainer = UrlAsJson.next;                  //next Url here offset 20 limit 40
+                          //next Url here offset 20 limit 40
         getAllPokemon(nextUrlAsJson);
         offset += 20;
     }
@@ -117,7 +110,6 @@ async function getAllPokemon(packageresultAsJson) {     //here we fetch each sin
 
 
 function renderFirstPokemon() {
-    
     let mainsectioncontent = document.getElementById('main-section-content');
     mainsectioncontent.innerHTML = "";
     for (let firstPokemonIndex = 0; firstPokemonIndex < 19; firstPokemonIndex++) {
@@ -134,13 +126,9 @@ function renderFirstPokemon() {
         ${allPokemon[firstPokemonIndex].types[1] ? `<img class="${allPokemon[firstPokemonIndex].types[1].type.name}" src="./images/icons/${allPokemon[firstPokemonIndex].types[1].type.name}.svg">` : ''}   
         </div>
         </div>`
-
-    } 
-
-    //here we see a short if-statement within a literals start with an ${} and put a literals again in the if statement within the literals
+    }
+  //here we see a short if-statement within a literals start with an ${} and put a literals again in the if statement within the literals
 };//so it's possible to put a literals within a literals
-
-
 
 function renderNextPokemon(allPokemon) {
     let mainsectioncontent = document.getElementById('main-section-content');
@@ -172,21 +160,12 @@ async function getEvolutionChainFromPokemon() {
     getAllEvoChains(evoUrlresponse);
 };
 
-// async function getNextEvolutionChainFromPokemon() {     //first fetchstep for names
-//     let evoUrl = await fetch(`https://pokeapi.co/api/v2/evolution-chain?offset=${evoOffset}&limit=${evoLimit}`);
-//     let evoUrlresponse = await evoUrl.json();
-//     console.log(evoUrlresponse);
-//     getAllEvoChains(evoUrlresponse);
-//     offset += 10;
-// };
-
 async function getAllEvoChains(evoUrlresponse) {                         //second fetchstep for names
     for (let index = 0; index < evoUrlresponse.results.length; index++) {
         let nextfetch = await fetch(evoUrlresponse.results[index].url);
         let singleUrlAsJson = await nextfetch.json();
         console.log(singleUrlAsJson);
         allEvoChains.push(singleUrlAsJson);
-
     }
 }
 
@@ -195,23 +174,12 @@ async function getAllEvoChains(evoUrlresponse) {                         //secon
 //side note: eine Domain ist nur eine andere schreibweise einer IP-Adresse
 //DNS = Domain Name System
 
-function showLoadingAnimation(){
+function showLoadingAnimation() {
     let loadingAnimation = document.getElementById('loadingSpinner')
     loadingAnimation.classList.remove('dont-Show')
 };
 
-function hidetoggleAnimation(){
+function hidetoggleAnimation() {
     let toggleCont = document.getElementById('loadingSpinner')
     toggleCont.classList.add('dont-Show')
 }
-
-
-
-
-
-// const words = ["spray", "elite", "exuberant", "destruction", "present"];
-
-// const result = pokemonList.filter((pokemon) => pokemon.name.includes("abc"));
-
-// console.log(result);
-// // Expected output: Array ["exuberant", "destruction", "present"]
