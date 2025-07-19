@@ -34,6 +34,14 @@ body {
     color: white;
 }
 
+.header-searchbar input{
+    border-radius: 5px;
+    padding:8px;
+    width:150px;
+    font-size: 14px;
+    background-color: lightblue;
+}
+
 .header-logo img {
     width: 125px;
 }
@@ -92,10 +100,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0px 15px;
+    
     width: 100%;
     max-width: 1920px;
     height: 200px;
+}
+
+.footer-content img{
+    width:380px;
 }
 
 .loadingSpinner {
@@ -108,6 +120,26 @@ body {
 
 .dont-Show {
     display: none;
+}
+
+@media(max-width:410px){
+    .header-logo img{
+        width:80px;
+    }
+    .header-logo h2{
+        font-size: 18px;
+    }
+
+    .header-searchbar input{
+        width:120px;
+    }
+
+    .footer-content img{
+        width:300px;
+    }
+    .main-section-fullsize{
+        padding: 30px 5px;
+    }
 }
 
 @keyframes loading {

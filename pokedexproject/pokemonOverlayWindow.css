@@ -1,6 +1,5 @@
 .OverlayWindow {
     width: 400px;
-    
     border: 2px solid red;
     border-radius: 10px;
     /*centre the div with 50% left the left top corner and move it 50%(200px) of the own width to the left to centre it*/
@@ -8,7 +7,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
 }
 
 .dont_show {
@@ -25,24 +23,24 @@
 }
 
 #skiptoprevious {
-    margin-right:10px;
+    margin-right: 10px;
     display: flex;
     justify-content: center;
     width: 20px;
     height: 15px;
-    
+
 }
 
 #skiptonext {
-    margin-left:10px;
-    display:flex;
+    margin-left: 10px;
+    display: flex;
     justify-content: center;
     width: 20px;
     height: 15px;
 }
 
-.arrowImage{
-    width:35px;
+.arrowImage {
+    width: 35px;
 }
 
 .buttonfield {
@@ -105,7 +103,18 @@
 .pokemondetails table {
     margin-top: 0px;
     width: 400px;
-    margin-left: 5px;
+
+}
+
+.pokemondetails td {
+    text-align: center;
+    width: 60px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pokemondetails img {
+    height: auto;
 }
 
 
@@ -117,4 +126,34 @@
     margin-right: 15px;
     border-radius: 5px;
     border: 2px solid yellow;
+}
+
+/* responsiv code starts here*/
+
+@media(max-width:450px) {
+    .OverlayWindow {
+        width: 295px;
+    }
+
+    .pokemondetails table {
+        width: 280px;
+    }
+
+    .pokeImg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .arrowImage {
+        width: 20px;
+        height: 20px;
+    }
+
+    .pokemondetails td {
+
+        width: 40px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
 }

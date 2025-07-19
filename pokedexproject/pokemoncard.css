@@ -194,3 +194,19 @@
 .water {
     background-color: lightblue;
 }
+
+/* responsiv starts here*/
+
+@media(max-width:350px){
+    .type-button-area{
+        width:240px;
+    }
+
+    .pokemoncontainer{
+        width:240px;
+    }
+
+    .ImageContainer{
+        width:240px;
+    }
+}

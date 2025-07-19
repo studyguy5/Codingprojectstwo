@@ -184,17 +184,20 @@ async function showEvoImage(evoChainAsJson, ImageResultArray) {
     evocontainer.innerHTML = `
     <table>
     <tr>
-        <td><img src="${ImageResultArray[0].sprites['front_default']}"></td>
+        <td><img class="pokeImg"src="${ImageResultArray[0].sprites['front_default']}"></td>
         <td><img class="arrowImage" src="./images/img/arrow-blue.png"></td>
-        <td><img src="${ImageResultArray[1].sprites['front_default']}"</td>
-        <td><img class="arrowImage" src="./images/img/arrow-blue.png"></td>
-        <td><img src="${ImageResultArray[2] ? ImageResultArray[2].sprites['front_default'] : ''}"</td>
+        <td><img class="pokeImg" src="${ImageResultArray[1].sprites['front_default']}"</td>
+        <td>${ImageResultArray[2] ? '<img class="arrowImage" src="./images/img/arrow-blue.png">' : ''}</td>
+        <td><img class="pokeImg" src="${ImageResultArray[2] ? ImageResultArray[2].sprites['front_default'] : ''}"</td>
     <tr>
     <tr>
-        <td> ${evoChainAsJson.chain.species.name}</td>
+        <td>${evoChainAsJson.chain.species.name}</td> 
+        <td></td>
         <td>${evoChainAsJson.chain.evolves_to[0].species.name}</td>
-        <td>${evoChainAsJson.chain.evolves_to[0].evolves_to[0] ? evoChainAsJson.chain.evolves_to[0].evolves_to[0].species.name : ''} </td>
-    <tr>
+        <td></td>
+        ${evoChainAsJson.chain.evolves_to[0].evolves_to[0] ? `<td>${evoChainAsJson.chain.evolves_to[0].evolves_to[0].species.name}</td>` : ''}
+    </tr>
+    
     </table>`;
 
     console.log('try it')

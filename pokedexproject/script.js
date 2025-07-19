@@ -11,13 +11,42 @@ let allEvoChains = [];
 
 async function init() {
     await getUrlForPokemon();
+    getEvolutionChainFromPokemon();
 };
 
 async function filterArray(){
     let connection = document.getElementById('filterinput').value.toLowerCase();
     if(connection.length > 2){
-    let filtertest = allPokemon.filter(allPokemon =>allPokemon.name.toLowerCase().includes(connection))
-    console.log(filtertest);}
+    let filterdArray = allPokemon.filter(allPokemon =>allPokemon.name.toLowerCase().includes(connection))
+    
+    renderfilteredArray(filterdArray);
+    console.log(filterdArray);}else 
+        if(connection.length < 3){
+
+           renderFirstPokemon(); // maybe set getEvolutionchain on init in order to not fetch each time one letter changes in the filter field
+        } 
+}
+
+function renderfilteredArray(filterdArray){
+    
+    let filtercont = document.getElementById('main-section-content')
+    filtercont.innerHTML="";
+    for (let filterIndex = 0; filterIndex < filterdArray.length; filterIndex++) {
+        filtercont.innerHTML +=`
+        <div onclick="overlayWindowdiv(${filterIndex}); toggleOverlayWrapper(${filterIndex})" class="pokemoncontainer">
+        <div class="pokemonName">
+        <h4>#${filterIndex + 1}</h4> <h3>${filterdArray[filterIndex].name}</h3>
+        </div>
+        <div class="ImageContainer ${filterdArray[filterIndex].types[0].type.name}-Img">
+        <img src="${filterdArray[filterIndex].sprites.other.dream_world['front_default']}">
+        </div>
+        <div class="type-button-area">
+        <img class="${filterdArray[filterIndex].types[0].type.name}"src="./images/icons/${filterdArray[filterIndex].types[0].type.name}.svg">
+        ${filterdArray[filterIndex].types[1] ? `<img class="${filterdArray[filterIndex].types[1].type.name}" src="./images/icons/${filterdArray[filterIndex].types[1].type.name}.svg">` : ''}   
+        </div>
+        </div>`
+        
+    }
 }
 
 function toggleOverlayWrapper() {
@@ -88,7 +117,9 @@ async function getAllPokemon(packageresultAsJson) {     //here we fetch each sin
 
 
 function renderFirstPokemon() {
+    
     let mainsectioncontent = document.getElementById('main-section-content');
+    mainsectioncontent.innerHTML = "";
     for (let firstPokemonIndex = 0; firstPokemonIndex < 19; firstPokemonIndex++) {
         mainsectioncontent.innerHTML += `
         <div onclick="overlayWindowdiv(${firstPokemonIndex}); toggleOverlayWrapper(${firstPokemonIndex})" class="pokemoncontainer">
@@ -104,7 +135,7 @@ function renderFirstPokemon() {
         </div>
         </div>`
 
-    } getEvolutionChainFromPokemon();
+    } 
 
     //here we see a short if-statement within a literals start with an ${} and put a literals again in the if statement within the literals
 };//so it's possible to put a literals within a literals

@@ -63,9 +63,9 @@ function showNextMain(cs) {
 // let textY = (barY + barheight) / 2;
 
 function showNextstats(cs) {
-    let statsValue = allPokemon[cs].stats[0].base_stat;
+    allPokemon[cs].stats[0].base_stat;
     let barX = 10;
-    let barY = 10;
+    let barY = 25;
     let barwidth = 150;
     let barheight = 30;
 
@@ -80,9 +80,9 @@ function showNextstats(cs) {
         <td><h3>${allPokemon[cs].stats[0].stat.name}</h3></td>
         <td><svg width="160" height="45">
         <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
-        <rect x="${barX + 2}" y="${barY + 2}" rx="10" ry="10" width="${(allPokemon[cs].stats[0].base_stat)}" height="26" fill="darkgray"/>
+        <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[cs].stats[0].base_stat)}" height="26" fill="darkgray"/>
         <text x="${textX}" y="${textY}" fill="red" font-size="14" text-anchor="middle" dominant-baseline="middle">
-    ${statsValue}
+    ${allPokemon[cs].stats[0].base_stat}
   </text>
         </svg>
         </td>
@@ -92,35 +92,45 @@ function showNextstats(cs) {
         <td><svg width="160" height="45">
         <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
         <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[cs].stats[1].base_stat)}" height="26" fill="darkgray"/>
-        </svg></td>
+        <text x="${textX}" y="${textY}" fill="red" font-size="14" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[cs].stats[0].base_stat}
+  </text></svg></td>
     </tr>
     <tr>
         <td><h3>${allPokemon[cs].stats[2].stat.name}</h3></td>
         <td><svg width="160" height="45">
         <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
         <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[cs].stats[2].base_stat)}" height="26" fill="darkgray"/>
-        </svg></td>
+        <text x="${textX}" y="${textY}" fill="red" font-size="14" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[cs].stats[0].base_stat}
+  </text></svg></td>
     </tr>
     <tr>
         <td><h3>${allPokemon[cs].stats[3].stat.name}</h3></td>
         <td><svg width="160" height="45">
         <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
         <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[cs].stats[3].base_stat)}" height="26" fill="darkgray"/>
-        </svg></td>
+        <text x="${textX}" y="${textY}" fill="red" font-size="14" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[cs].stats[0].base_stat}
+  </text></svg></td>
     </tr>
     <tr>
         <td><h3>${allPokemon[cs].stats[4].stat.name}</h3></td>
         <td><svg width="160" height="45">
         <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
         <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[cs].stats[4].base_stat)}" height="26" fill="darkgray"/>
-        </svg></td>
+        <text x="${textX}" y="${textY}" fill="red" font-size="14" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[cs].stats[0].base_stat}
+  </text></svg></td>
     </tr>
     <tr>
         <td><h3>${allPokemon[cs].stats[5].stat.name}</h3></td>
         <td><svg width="160" height="45">
         <rect x="10" y="10" width="150" rx="10" ry="10" height="30" stroke="orange" stroke-width="2" fill="none"/>
         <rect x="12" y="12" rx="10" ry="10" width="${(allPokemon[cs].stats[5].base_stat)}" height="26" fill="darkgray"/>
-        </svg></td>
+        <text x="${textX}" y="${textY}" fill="red" font-size="14" text-anchor="middle" dominant-baseline="middle">
+    ${allPokemon[cs].stats[0].base_stat}
+  </text></svg></td>
     </tr>
     </div>
     `
@@ -203,13 +213,15 @@ async function showNextEvoImage(SecondResultAsJson, NextImageResultArray) {
         <td><img src="${NextImageResultArray[0].sprites['front_default']}"></td>
         <td><img class="arrowImage" src="./images/img/arrow-blue.png"></td>
         <td><img src="${NextImageResultArray[1].sprites['front_default']}"</td>
-        <td><img class="arrowImage" src="./images/img/arrow-blue.png"></td>
+        <td>${NextImageResultArray[2] ? '<img class="arrowImage" src="./images/img/arrow-blue.png">' : ''}</td>
         <td><img src="${NextImageResultArray[2] ? NextImageResultArray[2].sprites['front_default'] : ''}"</td>
     <tr>
     <tr>
-        <td> ${SecondResultAsJson.chain.species.name}</td>
+        <td>${SecondResultAsJson.chain.species.name}</td>
+        <td></td>
         <td>${SecondResultAsJson.chain.evolves_to[0].species.name}</td>
-        <td>${SecondResultAsJson.chain.evolves_to[0].evolves_to[0] ? SecondResultAsJson.chain.evolves_to[0].evolves_to[0].species.name : ''} </td>
-    <tr>
+        <td></td>
+        ${SecondResultAsJson.chain.evolves_to[0].evolves_to[0] ? `<td>${SecondResultAsJson.chain.evolves_to[0].evolves_to[0].species.name}</td>` : ""} 
+    </tr>
     </table>`;
 };
