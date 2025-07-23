@@ -22,7 +22,7 @@ async function filterArray() {
         console.log(filterdArray);
     } else
         if (connection.length < 3) {
-            renderFirstPokemon(); 
+            renderFirstPokemon();
         }
 }
 
@@ -30,19 +30,7 @@ function renderfilteredArray(filterdArray) {
     let filtercont = document.getElementById('main-section-content')
     filtercont.innerHTML = "";
     for (let filterIndex = 0; filterIndex < filterdArray.length; filterIndex++) {
-        filtercont.innerHTML += `
-        <div onclick="overlayWindowdiv(${filterIndex}); toggleOverlayWrapper(${filterIndex})" class="pokemoncontainer">
-        <div class="pokemonName">
-        <h4>#${filterIndex + 1}</h4> <h3>${filterdArray[filterIndex].name}</h3>
-        </div>
-        <div class="ImageContainer ${filterdArray[filterIndex].types[0].type.name}-Img">
-        <img src="${filterdArray[filterIndex].sprites.other.dream_world['front_default']}">
-        </div>
-        <div class="type-button-area">
-        <img class="${filterdArray[filterIndex].types[0].type.name}"src="./images/icons/${filterdArray[filterIndex].types[0].type.name}.svg">
-        ${filterdArray[filterIndex].types[1] ? `<img class="${filterdArray[filterIndex].types[1].type.name}" src="./images/icons/${filterdArray[filterIndex].types[1].type.name}.svg">` : ''}   
-        </div>
-        </div>`
+        filtercont.innerHTML += renderFilteredPokemon(filterIndex);
     }
 }
 
@@ -72,12 +60,12 @@ async function getNextUrlSet() {
     if (offset > 1299) {
         let fetchNextPackage = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=2`);            //fetch the Url Package ich muss das hier dynamisch machen
         let nextUrlAsJson = await fetchNextPackage.json();              //transform into json
-                          //next Url here offset 20 limit 40
+        //next Url here offset 20 limit 40
         getAllPokemon(nextUrlAsJson);
     } else {
         let fetchNextPackage = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);            //fetch the Url Package ich muss das hier dynamisch machen
         let nextUrlAsJson = await fetchNextPackage.json();              //transform into json
-                          //next Url here offset 20 limit 40
+        //next Url here offset 20 limit 40
         getAllPokemon(nextUrlAsJson);
         offset += 20;
     }
@@ -103,54 +91,21 @@ async function getAllPokemon(packageresultAsJson) {     //here we fetch each sin
 
 //<img src="${detailsAsJSON.sprites.other.showdown['front_default']}"> thats the gif's who moves in the image
 
-//https://willowy-alfajores-643a8c.netlify.app/manifest.json
-//https://app-manifest.firebaseapp.com/
-
-//VM im Debugger steht für Virtual Maschine
-
-
 function renderFirstPokemon() {
     let mainsectioncontent = document.getElementById('main-section-content');
     mainsectioncontent.innerHTML = "";
     for (let firstPokemonIndex = 0; firstPokemonIndex < 19; firstPokemonIndex++) {
-        mainsectioncontent.innerHTML += `
-        <div onclick="overlayWindowdiv(${firstPokemonIndex}); toggleOverlayWrapper(${firstPokemonIndex})" class="pokemoncontainer">
-        <div class="pokemonName">
-        <h4>#${firstPokemonIndex + 1}</h4> <h3>${allPokemon[firstPokemonIndex].name}</h3>
-        </div>
-        <div class="ImageContainer ${allPokemon[firstPokemonIndex].types[0].type.name}-Img">
-        <img src="${allPokemon[firstPokemonIndex].sprites.other.dream_world['front_default']}">
-        </div>
-        <div class="type-button-area">
-        <img class="${allPokemon[firstPokemonIndex].types[0].type.name}"src="./images/icons/${allPokemon[firstPokemonIndex].types[0].type.name}.svg">
-        ${allPokemon[firstPokemonIndex].types[1] ? `<img class="${allPokemon[firstPokemonIndex].types[1].type.name}" src="./images/icons/${allPokemon[firstPokemonIndex].types[1].type.name}.svg">` : ''}   
-        </div>
-        </div>`
+        mainsectioncontent.innerHTML += renderHtmlFirstPokemon(firstPokemonIndex);
     }
-  //here we see a short if-statement within a literals start with an ${} and put a literals again in the if statement within the literals
-};//so it's possible to put a literals within a literals
+};
 
-function renderNextPokemon(allPokemon) {
+function renderNextPokemon() {
     let mainsectioncontent = document.getElementById('main-section-content');
     for (let cs = currentStartNumber; cs < currentStartNumber + 20; cs++) {        //variable- currentStartNumbe is seted in head area, so instead of a number, there is placed a variable in the loop as start
         //also +1 added to the index, because it starts at 0
-        mainsectioncontent.innerHTML += `
-        <div onclick="NextoverlayWindowdiv(${cs}); toggleOverlayWrapper(${cs})" class="pokemoncontainer">
-        <div class="pokemonName">
-        <h4>#${cs + 1}</h4> <h3>${allPokemon[cs].name}</h3>                         
-        </div>
-        <div class="ImageContainer ${allPokemon[cs].types[0].type.name}-Img">
-        <img src="${allPokemon[cs].sprites.other.dream_world['front_default']}">
-        </div>
-        <div class="type-button-area">
-        <img class="${allPokemon[cs].types[0].type.name}"src="./images/icons/${allPokemon[cs].types[0].type.name}.svg">
-        ${allPokemon[cs].types[1] ? `<img class="${allPokemon[cs].types[1].type.name}" src="./images/icons/${allPokemon[cs].types[1].type.name}.svg">` : ''}   
-        </div>
-        </div>`
+        mainsectioncontent.innerHTML += renderHtmlForAllNextPokemon(cs);
     }
     currentStartNumber += 20;   // at the end of 20 rounds to the currentStartNumber is added 20, which is the next start
-    // getNextEvolutionChainFromPokemon();
-    console.log(allPokemon);
 };
 
 async function getEvolutionChainFromPokemon() {
