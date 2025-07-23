@@ -1,5 +1,9 @@
 let firstfetchArray = [];
 let secondfetchArray = [];
+let mainDataArrayWord = ["height", "weight", "base_experience", "abilities", "abilities"];
+
+
+
 
 function overlayWindowdiv(firstPokemonIndex) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
@@ -15,7 +19,7 @@ function overlayWindowdiv(firstPokemonIndex) {
     <div class="pokemondetails" id="pokemondetails">
     </div>
    `
-    showMain(firstPokemonIndex);
+    showMain(firstPokemonIndex, mainDataArrayWord);
 };
 
 
@@ -31,36 +35,18 @@ function skipToPrevious(firstPokemonIndex){
 
 
 
-function showMain(firstPokemonIndex) {
+
+function showMain(firstPokemonIndex, mainDataArrayWord) {
     let maincontainer = document.getElementById('pokemondetails')
-    maincontainer.innerHTML = `
-    <table>
-    <tr>
-        <td><h3>Height</h3></td>
-        <td><h3>${allPokemon[firstPokemonIndex].height}</h3></td>
-    </tr>
-    <tr>
-        <td><h3>weight</h3></td>
-        <td><h3>${allPokemon[firstPokemonIndex].weight}</h3></td>
-    </tr>
-    <tr>
-        <td><h3>Base esperience</h3></td>
-        <td><h3>${allPokemon[firstPokemonIndex].base_experience}</h3></td>
-    </tr>
-    <tr>
-        <td><h3>abilitys</h3></td>
-        <td><h3>${allPokemon[firstPokemonIndex].abilities[0].ability.name} ${allPokemon[firstPokemonIndex].abilities[1] ? `${allPokemon[firstPokemonIndex].abilities[1].ability.name}` : ''}</h3></td>
-    </tr>`
-}
+    for (let mainDataIndex = 0; mainDataIndex < mainDataArrayWord.length; mainDataIndex++) {
+    let value3 = allPokemon[firstPokemonIndex][mainDataArrayWord[3]][0].ability.name;
+    let value4 = allPokemon[firstPokemonIndex][mainDataArrayWord[4]][1] ? ', ' + allPokemon[firstPokemonIndex][mainDataArrayWord[4]][1].ability.name : "";
+    maincontainer.innerHTML += renderMainData(mainDataIndex, firstPokemonIndex, mainDataArrayWord, value3, value4) }
+};   
 
 function showstats(firstPokemonIndex) {
-    let barX = 10;
-    let barY = 25;
-    let barwidth = 150;
-    let barheight = 30;
-
-    let textX = (barX + barwidth) / 2;
-    let textY = (barY + barheight) / 2;
+    let textX = (10 + 150) / 2;
+    let textY = (25 + 30) / 2;
 
     let statscontainer = document.getElementById('pokemondetails')
     statscontainer.innerHTML = `<div>
