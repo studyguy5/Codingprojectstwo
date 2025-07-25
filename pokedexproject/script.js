@@ -111,7 +111,6 @@ function renderNextPokemon() {
 async function getEvolutionChainFromPokemon() {
     let evoUrl = await fetch(evolutionchainUrlset);
     let evoUrlresponse = await evoUrl.json();
-    console.log(evoUrlresponse);
     getAllEvoChains(evoUrlresponse);
 };
 
@@ -119,7 +118,6 @@ async function getAllEvoChains(evoUrlresponse) {                         //secon
     for (let index = 0; index < evoUrlresponse.results.length; index++) {
         let nextfetch = await fetch(evoUrlresponse.results[index].url);
         let singleUrlAsJson = await nextfetch.json();
-        console.log(singleUrlAsJson);
         allEvoChains.push(singleUrlAsJson);
     }
 }
