@@ -1,8 +1,8 @@
 let allPokemon = [];
-let firstload = true;
+// let firstload = true;
 let firstLoad = true;
 let packageresultAsJson = [];
-let currentStartNumber = 19;
+let currentIndex = 0;//19 before
 let offset = 20;
 let limit = 20;
 let evoOffset = 10;
@@ -22,7 +22,7 @@ async function filterArray() {
         console.log(filterdArray);
     } else
         if (connection.length < 3) {
-            renderFirstPokemon();
+            renderNextPokemon();
         }
 }
 
@@ -77,36 +77,26 @@ async function getAllPokemon(packageresultAsJson) {     //here we fetch each sin
         let singlePokemonInJson = await singelUrl.json();
         allPokemon.push(singlePokemonInJson);
     };
-    if (firstload) {
-        hidetoggleAnimation();
-        renderFirstPokemon();
-        document.getElementById('buttonId').disabled = false;
-        firstload = false;
-    } else {
-        hidetoggleAnimation();
-        renderNextPokemon(allPokemon);
-        document.getElementById('buttonId').disabled = false;
-    }
+    document.getElementById('buttonId').disabled = false;
+    hideLoadingAnimation();
+    loadPokemon(allPokemon);
+       
 }
 
 //<img src="${detailsAsJSON.sprites.other.showdown['front_default']}"> thats the gif's who moves in the image
 
-function renderFirstPokemon() {
+
+
+function loadPokemon() {
     let mainsectioncontent = document.getElementById('main-section-content');
-    mainsectioncontent.innerHTML = "";
-    for (let firstPokemonIndex = 0; firstPokemonIndex < 19; firstPokemonIndex++) {
-        mainsectioncontent.innerHTML += renderHtmlFirstPokemon(firstPokemonIndex);
+    for (let currentIndex = 0; currentIndex < currentIndex + 20; currentIndex++) {        //variable- currentStartNumbe is seted in head area, so instead of a number, there is placed a variable in the loop as start
+        //also +1 added to the index, because it starts at 0
+        mainsectioncontent.innerHTML += renderHtmlForPokemon(currentIndex);
     }
+    currentIndex += 20;   // at the end of 20 rounds to the currentStartNumber is added 20, which is the next start
+    
 };
 
-function renderNextPokemon() {
-    let mainsectioncontent = document.getElementById('main-section-content');
-    for (let cs = currentStartNumber; cs < currentStartNumber + 20; cs++) {        //variable- currentStartNumbe is seted in head area, so instead of a number, there is placed a variable in the loop as start
-        //also +1 added to the index, because it starts at 0
-        mainsectioncontent.innerHTML += renderHtmlForAllNextPokemon(cs);
-    }
-    currentStartNumber += 20;   // at the end of 20 rounds to the currentStartNumber is added 20, which is the next start
-};
 
 async function getEvolutionChainFromPokemon() {
     let evoUrl = await fetch(evolutionchainUrlset);
@@ -132,7 +122,7 @@ function showLoadingAnimation() {
     loadingAnimation.classList.remove('dont-Show')
 };
 
-function hidetoggleAnimation() {
+function hideLoadingAnimation() {
     let toggleCont = document.getElementById('loadingSpinner')
     toggleCont.classList.add('dont-Show')
 }
