@@ -7,6 +7,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    
 }
 
 .dont_show {
@@ -28,7 +29,7 @@
     justify-content: center;
     width: 20px;
     height: 15px;
-
+    cursor:pointer;
 }
 
 #skiptonext {
@@ -37,6 +38,7 @@
     justify-content: center;
     width: 20px;
     height: 15px;
+    cursor:pointer;
 }
 
 .arrowImage {
@@ -65,6 +67,7 @@
 
 .mainInfoCategoriesOverlay {
     background-color: rgb(46, 49, 197);
+    padding-left:10px;
     height: 40px;
     display: flex;
     justify-content: space-evenly;
@@ -99,19 +102,25 @@
 }
 
 .pokemondetails table {
+    margin-left:10px;
     margin-top: 0px;
-    width: 400px;
+    width: 380px;
 }
 
-.pokemondetails td {
-    text-align: center;
-    width: 60px;
-    font-size: 18px;
-    font-weight: bold;
+.rightLine{
+    text-align:end;
+}
+
+.pokemondetails h3{
+    width:180px;
 }
 
 .pokemondetails img {
     height: auto;
+}
+
+.nameTDinEvo{
+    padding-left:20px;
 }
 
 .CloseButton {
@@ -120,6 +129,7 @@
     margin-right: 15px;
     border-radius: 5px;
     border: 2px solid yellow;
+    cursor:pointer;
 }
 
 /* responsiv code starts here*/

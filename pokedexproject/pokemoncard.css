@@ -4,6 +4,7 @@
     height: 320px;
     border: 2px solid blue;
     border-radius: 10px;
+    cursor:pointer;
 }
 
 .pokemoncontainer:hover{
@@ -84,7 +85,7 @@
 }
 
 .fighting-Img{
-    background-color: gold;
+    background-color: rgb(206, 176, 9);
 }
 
 .rock-Img{
@@ -122,10 +123,12 @@
     width: 38px;
     height: 38px;
     padding: 5px;
-    margin-right: 10px;
     border-radius: 15px;
 }
 
+.fighting{
+    background-color:rgb(201, 181, 5);
+}
 .fire {
     background-color: orangered;
 }
@@ -147,7 +150,7 @@
 }
 
 .electric {
-    background-color: yellow;
+    background-color: rgb(216, 216, 15);
 }
 
 .fairy {

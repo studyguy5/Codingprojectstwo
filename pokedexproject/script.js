@@ -1,8 +1,7 @@
 let allPokemon = [];
-// let firstload = true;
 let firstLoad = true;
 let packageresultAsJson = [];
-let currentIndex = 0;//19 before
+let currentIndex = 0;
 let offset = 20;
 let limit = 20;
 let evoOffset = 10;
@@ -19,10 +18,9 @@ async function filterArray() {
     if (connection.length > 2) {
         let filterdArray = allPokemon.filter(allPokemon => allPokemon.name.toLowerCase().includes(connection))
         renderfilteredArray(filterdArray);
-        console.log(filterdArray);
     } else
         if (connection.length < 3) {
-            renderNextPokemon();
+            loadPokemon();
         }
 }
 
@@ -30,7 +28,7 @@ function renderfilteredArray(filterdArray) {
     let filtercont = document.getElementById('main-section-content')
     filtercont.innerHTML = "";
     for (let filterIndex = 0; filterIndex < filterdArray.length; filterIndex++) {
-        filtercont.innerHTML += renderFilteredPokemon(filterIndex);
+        filtercont.innerHTML += renderFilteredPokemon(filterdArray,filterIndex);
     }
 }
 
@@ -89,9 +87,10 @@ async function getAllPokemon(packageresultAsJson) {     //here we fetch each sin
 
 function loadPokemon() {
     let mainsectioncontent = document.getElementById('main-section-content');
-    for (let currentIndex = 0; currentIndex < currentIndex + 20; currentIndex++) {        //variable- currentStartNumbe is seted in head area, so instead of a number, there is placed a variable in the loop as start
+    mainsectioncontent.innerHTML = "";
+    for (let i = currentIndex; i < currentIndex + 20; i++) {        //variable- currentStartNumbe is seted in head area, so instead of a number, there is placed a variable in the loop as start
         //also +1 added to the index, because it starts at 0
-        mainsectioncontent.innerHTML += renderHtmlForPokemon(currentIndex);
+        mainsectioncontent.innerHTML += renderHtmlForPokemon(i);
     }
     currentIndex += 20;   // at the end of 20 rounds to the currentStartNumber is added 20, which is the next start
     

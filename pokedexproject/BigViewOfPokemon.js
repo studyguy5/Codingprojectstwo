@@ -4,49 +4,48 @@ let mainDataArrayWord = ["height", "weight", "base_experience", "abilities", "ab
 let stats = ['0', '1', '2', '4', '5']//try to put the stats into an array
 let ImageResultArray = [];
 
-function overlayWindowdiv(firstPokemonIndex) {
+function overlayWindowdiv(i) {
     let conectionToOverlaydiv = document.getElementById('OverlayWindow')
-    conectionToOverlaydiv.innerHTML = renderOverlayDiv(firstPokemonIndex);
-    showMain(firstPokemonIndex, mainDataArrayWord);
+    conectionToOverlaydiv.innerHTML = renderOverlayDiv(i);
+    showMain(i, mainDataArrayWord);
 };
 
 
-function skipToNext(currentIndex) {
-    currentIndex++
-    overlayWindowdiv(currentIndex);
+function skipToNext(i) {
+    i++
+    overlayWindowdiv(i);
 }
 
-function skipToPrevious(currentIndex) {
-    currentIndex--
-    overlayWindowdiv(currentIndex);
+function skipToPrevious(i) {
+    i--
+    overlayWindowdiv(i);
 }
 
 
-function showMain(currentIndex, mainDataArrayWord) {
+function showMain(i, mainDataArrayWord) {
     let maincontainer = document.getElementById('pokemondetails')
     for (let mainDataIndex = 0; mainDataIndex < mainDataArrayWord.length; mainDataIndex++) {
-        let value3 = allPokemon[currentIndex][mainDataArrayWord[3]][0].ability.name;
-        let value4 = allPokemon[currentIndex][mainDataArrayWord[4]][1] ? ', ' + allPokemon[currentIndex][mainDataArrayWord[4]][1].ability.name : "";
-        maincontainer.innerHTML += renderMainData(mainDataIndex, currentIndex, mainDataArrayWord, value3, value4)
+        let value3 = allPokemon[i][mainDataArrayWord[3]][0].ability.name;
+        let value4 = allPokemon[i][mainDataArrayWord[4]][1] ? ', ' + allPokemon[i][mainDataArrayWord[4]][1].ability.name : "";
+        maincontainer.innerHTML += renderMainData(mainDataIndex, i, mainDataArrayWord, value3, value4)
     }
-    console.log('Funktion: showmain')
 };
 
-function showstats(currentIndex) {
+function showstats(i) {
     let textX = (10 + 150) / 2;
     let textY = (25 + 30) / 2;
     let statscontainer = document.getElementById('pokemondetails')
     statscontainer.innerHTML = "";
     for (let statsIndex = 0; statsIndex < stats.length; statsIndex++) {
-        statscontainer.innerHTML += renderStats(currentIndex, statsIndex, textX, textY)
+        statscontainer.innerHTML += renderStats(i, statsIndex, textX, textY)
     }
 };
 
-async function showEvochain(currentIndex) {
+async function showEvochain(i) {
     ImageResultArray = [];
     firstfetchArray = [];
     secondfetchArray = [];
-    let evoChainAsJson = await getEvoChain(currentIndex);
+    let evoChainAsJson = await getEvoChain(i);
     let nameArray = [
         evoChainAsJson.chain.species.name,
         evoChainAsJson.chain.evolves_to[0].species.name,
@@ -57,8 +56,8 @@ async function showEvochain(currentIndex) {
     await showEvoImage(evoChainAsJson, ImageResultArray);
 };
 
-async function getEvoChain(currentIndex) {
-    let evoUrl = `https://pokeapi.co/api/v2/pokemon-species/${currentIndex + 1}/`
+async function getEvoChain(i) {
+    let evoUrl = `https://pokeapi.co/api/v2/pokemon-species/${i + 1}/`
     let evoFetch = await fetch(evoUrl);
     let resultAsJson = await evoFetch.json();
     let secondFetch = await fetch(resultAsJson.evolution_chain.url);
