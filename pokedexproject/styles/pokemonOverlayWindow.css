@@ -1,13 +1,11 @@
 .OverlayWindow {
     width: 400px;
-    border: 2px solid red;
+    border: 3px solid rgb(196, 206, 65);
     border-radius: 10px;
-    /*centre the div with 50% left the left top corner and move it 50%(200px) of the own width to the left to centre it*/
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
 }
 
 .dont_show {
@@ -29,7 +27,7 @@
     justify-content: center;
     width: 20px;
     height: 15px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #skiptonext {
@@ -38,15 +36,20 @@
     justify-content: center;
     width: 20px;
     height: 15px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .arrowImage {
     width: 35px;
 }
 
+.buttonleft {
+    margin-left: 30px;
+}
+
 .buttonfield {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -54,8 +57,17 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    width: 40px;
     margin-left: 10px;
     font-weight: bold;
+}
+
+.pokemonNameOverlay h3 {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    color: rgba(5, 248, 45, 0.979);
+    font-size: 22px;
 }
 
 .ImageContainerOverlay {
@@ -67,7 +79,7 @@
 
 .mainInfoCategoriesOverlay {
     background-color: rgb(46, 49, 197);
-    padding-left:10px;
+    padding-left: 10px;
     height: 40px;
     display: flex;
     justify-content: space-evenly;
@@ -102,25 +114,33 @@
 }
 
 .pokemondetails table {
-    margin-left:10px;
-    margin-top: 0px;
-    width: 380px;
+    /* margin-left: 10px; */
+    margin: 0px 5px;
+    width: 395px;
 }
 
-.rightLine{
-    text-align:end;
+.rightLinetdinList {
+    width: 180px;
+    text-align-last: end;
 }
 
-.pokemondetails h3{
-    width:180px;
+.leftLinetdinList {
+    width: 160px;
+}
+
+.rightLinetdinList h3 {
+    display: flex;
+    justify-content: end;
+    width: 220px;
+
 }
 
 .pokemondetails img {
     height: auto;
 }
 
-.nameTDinEvo{
-    padding-left:20px;
+.nameTDinEvo {
+    padding-left: 20px;
 }
 
 .CloseButton {
@@ -129,7 +149,7 @@
     margin-right: 15px;
     border-radius: 5px;
     border: 2px solid yellow;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* responsiv code starts here*/
@@ -140,7 +160,7 @@
     }
 
     .pokemondetails table {
-        width: 280px;
+        width: 290px;
     }
 
     .pokeImg {
@@ -149,14 +169,51 @@
     }
 
     .arrowImage {
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
     }
 
-    .pokemondetails td {
-        width: 40px;
-        font-size: 14px;
-        font-weight: bold;
+    .mainInfoCategoriesOverlay h4 {
+        margin-left: 20px;
+        margin-right: 20px;
+
     }
 
+    .pokemondetails h3 {
+        font-size: 16px;
+    }
+
+    .rightLinetdinList h3 {
+        width: 180px;
+
+    }
+
+    .rightLinetdinList {
+        width: 200px;
+    }
+
+    .leftLinetdinList {
+        width: 138px;
+    }
+
+    .leftLinetdinList h3 {
+        width: 80px;
+    }
+
+    .pokemondetails svg {
+        width: 130px;
+    }
+
+    .outrect {
+        width: 110px;
+    }
+
+    .buttonfield h3 {
+        font-size: 16px;
+        width: 80px
+    }
+
+    .nameTDinEvo {
+        padding-left: 10px;
+    }
 }

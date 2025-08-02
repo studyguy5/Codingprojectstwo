@@ -4,12 +4,12 @@
     height: 320px;
     border: 2px solid blue;
     border-radius: 10px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.pokemoncontainer:hover{
+.pokemoncontainer:hover {
     transition: 0.25s ease-out;
-    transform:scale(1.05); 
+    transform: scale(1.05);
     box-shadow: 3px 3px 8px white, -3px -3px 8px white;
 }
 
@@ -80,27 +80,27 @@
     background-color: lightblue;
 }
 
-.poison-Img{
+.poison-Img {
     background-color: rgb(138, 52, 52);
 }
 
-.fighting-Img{
+.fighting-Img {
     background-color: rgb(206, 176, 9);
 }
 
-.rock-Img{
+.rock-Img {
     background-color: brown;
 }
 
-.psychic-Img{
+.psychic-Img {
     background-color: lightsalmon;
 }
 
-.ghost-Img{
+.ghost-Img {
     background-color: grey;
 }
 
-.dark-Img{
+.dark-Img {
     background-color: darkgrey;
 }
 
@@ -126,9 +126,10 @@
     border-radius: 15px;
 }
 
-.fighting{
-    background-color:rgb(201, 181, 5);
+.fighting {
+    background-color: rgb(201, 181, 5);
 }
+
 .fire {
     background-color: orangered;
 }
@@ -200,16 +201,16 @@
 
 /* responsiv starts here*/
 
-@media(max-width:350px){
-    .type-button-area{
-        width:240px;
+@media(max-width:350px) {
+    .type-button-area {
+        width: 240px;
     }
 
-    .pokemoncontainer{
-        width:240px;
+    .pokemoncontainer {
+        width: 240px;
     }
 
-    .ImageContainer{
-        width:240px;
+    .ImageContainer {
+        width: 240px;
     }
 }

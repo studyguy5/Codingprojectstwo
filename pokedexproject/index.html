@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon-Viewer</title>
     <link rel="icon" href="./images/icons/Pokemon-Favicon.ico">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./pokemoncard.css">
-    <link rel="stylesheet" href="./pokemonOverlayWindow.css">
-    <script src="./script.js"></script>
-    <script src="./render.js"></script>
-    <script src="./BigViewOfPokemon.js"></script>
-    <!-- <script src="./nexttwentyPokemonBigWindow.js"></script> -->
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/pokemoncard.css">
+    <link rel="stylesheet" href="./styles/pokemonOverlayWindow.css">
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/render.js"></script>
+    <script src="./scripts/bigViewOfPokemon.js"></script>
+    
 </head>
 
 <body onload="init()">
@@ -23,9 +23,10 @@
                 <h2>Pokedex</h2>
             </div>
             <div class="header-searchbar">
-                <input id="filterinput" oninput="filterArray()" minlength="4" type="search"
+                <input id="filterinput" oninput="ClearFilter(allPokemon)" minlength="3" required  type="search"
                     placeholder="search here...">
-            </div><!--<button onclick="renderPokemon()">Try</button>-->
+                    <button class="searchButton" onclick="filterArray()">Try</button>
+            </div>
         </header>
     </div>
     <main class="main-section-fullsize">
@@ -35,7 +36,7 @@
         </div>
         <div class="main-section-content" id="main-section-content">
         </div>
-        
+
         <img src="./images/img/pokemonball.png" alt="LoadingSpinner" id="loadingSpinner"
             class="loadingSpinner dont-Show">
         <button id="buttonId" onclick="getNextUrlSet()">Load Next Pokemon</button>
